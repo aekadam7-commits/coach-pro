@@ -1,0 +1,13 @@
+{
+  "appId": "com.aissa.coachpro",
+  "appName": "مدرّبي Pro",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#05080f"
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
