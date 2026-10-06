@@ -25,7 +25,19 @@ jobs:
           java-version: '17'
 
       - name: 🤖 تجهيز Android SDK
-        uses: android-actions/setup-android@v3
+        run: |
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          cd $ANDROID_HOME/cmdline-tools
+          wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O tools.zip
+          unzip -q tools.zip
+          mv cmdline-tools latest
+          rm tools.zip
+          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
+
+      - name: ✅ قبول تراخيص Android SDK
+        run: |
+          yes | sdkmanager --licenses || true
+          sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
 
       - name: 📦 تثبيت الحزم
         run: npm install
@@ -33,8 +45,8 @@ jobs:
       - name: 🏗️ إضافة منصة Android
         run: npx cap add android
 
-      - name: 🎨 توليد الأيقونة من resources/icon.png
-        run: npx @capacitor/assets generate --android --iconBackgroundColor '#05080f' --iconBackgroundColorDark '#05080f'
+      - name: 🎨 توليد الأيقونة
+        run: npx @capacitor/assets generate --android
         continue-on-error: true
 
       - name: 🔄 مزامنة الملفات
