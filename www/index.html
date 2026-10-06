@@ -1695,68 +1695,148 @@ function moveTsDrill(i,dir){
   renderTsSelected();
 }
 
-/* ============ PDF EXPORT (SAVE AS PDF) ============ */
-/* يستخدم window.print() مع CSS مخصص للطباعة. على الهاتف، سيفتح "حفظ ك PDF" */
-function exportPDF(htmlContent, filename){
-  const win=window.open('','_blank','width=900,height=1200');
-  if(!win){
-    toast('⚠️ فعّل النوافذ المنبثقة');
-    return;
+/* ============ PDF EXPORT — Capacitor Native ============ */
+async function exportPDF(htmlContent, filename) {
+  const safeName = (filename || 'document').replace(/[^\w\u0600-\u06FF-]/g, '_');
+  const fileName = safeName + '.html';
+
+  const fullHTML = `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(safeName)}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{margin:0;padding:0;font-family:'Cairo',sans-serif;background:#fff;color:#000}
+  @page{size:A4;margin:12mm 10mm}
+  @media print{.no-print{display:none !important}}
+  .no-print{
+    position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:999;
+    display:flex;gap:10px;background:rgba(0,0,0,.9);padding:12px 14px;border-radius:16px;
+    box-shadow:0 10px 40px rgba(0,0,0,.5);direction:rtl;
   }
-  win.document.write(`
-    <!DOCTYPE html>
-    <html lang="ar" dir="rtl">
-    <head>
-      <meta charset="UTF-8">
-      <title>${esc(filename)}</title>
-      <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-      <style>
-        *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-        body{margin:0;padding:0;font-family:'Cairo',sans-serif;background:#fff;color:#000}
-        @page{size:A4;margin:12mm 10mm}
-        @media print{body{padding:0}}
-        .no-print{
-          position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:999;
-          display:flex;gap:10px;background:rgba(0,0,0,.85);padding:10px;border-radius:14px;
-        }
-        .no-print button{
-          padding:12px 22px;border-radius:10px;border:none;cursor:pointer;
-          font-family:'Cairo',sans-serif;font-weight:800;font-size:14px;
-          background:linear-gradient(135deg,#22c55e,#0ea5e9);color:#04220f;
-        }
-        .no-print button.close{background:#333;color:#fff}
-        .print-page{direction:rtl;color:#000;background:#fff;padding:0}
-        .print-page h1{
-          font-size:22pt;font-weight:900;text-align:center;
-          border-bottom:3px double #000;padding-bottom:6px;margin:0 0 6mm;
-        }
-        .print-page h2{
-          font-size:13pt;font-weight:800;background:#f0f0f0;
-          padding:5px 12px;margin:7mm 0 3mm;border-right:4px solid #22c55e;
-        }
-        .print-page .print-meta{display:grid;grid-template-columns:1fr 1fr;gap:3mm 8mm;margin-bottom:5mm;font-size:11pt}
-        .print-page .print-meta div{border-bottom:1px dotted #999;padding:3px 0;display:flex;justify-content:space-between}
-        .print-page .print-meta b{font-weight:800}
-        .print-page table{width:100%;border-collapse:collapse;margin-bottom:5mm;font-size:10.5pt}
-        .print-page table th{background:#e5e5e5;font-weight:800;padding:6px 8px;border:1px solid #666;text-align:center}
-        .print-page table td{padding:6px 8px;border:1px solid #666;text-align:center}
-        .print-page table td:first-child{text-align:right;font-weight:700}
-        .print-page .print-signature{margin-top:10mm;display:flex;justify-content:space-between;font-size:11pt}
-        .print-page .print-signature div{border-top:2px solid #000;padding-top:3px;min-width:60mm;text-align:center;font-weight:700}
-        .print-page .print-total{text-align:center;font-size:13pt;font-weight:900;background:#f0f0f0;padding:4mm;margin:4mm 0;border:2px solid #000}
-        .print-page .print-footer{text-align:center;font-size:9pt;color:#666;margin-top:10mm;border-top:1px solid #ccc;padding-top:3mm}
-      </style>
-    </head>
-    <body>
-      <div class="no-print">
-        <button onclick="window.print()">📄 حفظ PDF / طباعة</button>
-        <button class="close" onclick="window.close()">إغلاق</button>
-      </div>
-      ${htmlContent}
-    </body>
-    </html>
-  `);
-  win.document.close();
+  .no-print button{
+    padding:12px 22px;border-radius:12px;border:none;cursor:pointer;
+    font-family:'Cairo',sans-serif;font-weight:800;font-size:14px;
+    background:linear-gradient(135deg,#22c55e,#0ea5e9);color:#04220f;white-space:nowrap;
+  }
+  .no-print button.close{background:#444;color:#fff}
+  .print-page{direction:rtl;color:#000;background:#fff;padding:0}
+  .print-page h1{font-size:22pt;font-weight:900;text-align:center;border-bottom:3px double #000;padding-bottom:6px;margin:0 0 6mm}
+  .print-page h2{font-size:13pt;font-weight:800;background:#f0f0f0;padding:5px 12px;margin:7mm 0 3mm;border-right:4px solid #22c55e}
+  .print-page .print-meta{display:grid;grid-template-columns:1fr 1fr;gap:3mm 8mm;margin-bottom:5mm;font-size:11pt}
+  .print-page .print-meta div{border-bottom:1px dotted #999;padding:3px 0;display:flex;justify-content:space-between}
+  .print-page .print-meta b{font-weight:800}
+  .print-page table{width:100%;border-collapse:collapse;margin-bottom:5mm;font-size:10.5pt}
+  .print-page table th{background:#e5e5e5;font-weight:800;padding:6px 8px;border:1px solid #666;text-align:center}
+  .print-page table td{padding:6px 8px;border:1px solid #666;text-align:center}
+  .print-page table td:first-child{text-align:right;font-weight:700}
+  .print-page .print-signature{margin-top:10mm;display:flex;justify-content:space-between;font-size:11pt}
+  .print-page .print-signature div{border-top:2px solid #000;padding-top:3px;min-width:60mm;text-align:center;font-weight:700}
+  .print-page .print-total{text-align:center;font-size:13pt;font-weight:900;background:#f0f0f0;padding:4mm;margin:4mm 0;border:2px solid #000}
+  .print-page .print-footer{text-align:center;font-size:9pt;color:#666;margin-top:10mm;border-top:1px solid #ccc;padding-top:3mm}
+</style>
+</head>
+<body>
+<div class="no-print">
+  <button onclick="window.print()">🖨️ طباعة / حفظ PDF</button>
+  <button class="close" onclick="window.close()">إغلاق</button>
+</div>
+${htmlContent}
+</body>
+</html>`;
+
+  const Cap = window.Capacitor;
+  const isNative = Cap && typeof Cap.isNativePlatform === 'function' && Cap.isNativePlatform();
+
+  if (isNative) {
+    try {
+      const Filesystem = Cap.Plugins.Filesystem;
+      const Share = Cap.Plugins.Share;
+      const Browser = Cap.Plugins.Browser;
+
+      if (!Filesystem || !Share || !Browser) {
+        toast('⚠️ الإضافات غير مثبتة — أعد بناء APK');
+        return;
+      }
+
+      await Filesystem.writeFile({
+        path: fileName,
+        data: fullHTML,
+        directory: 'CACHE',
+        encoding: 'utf8'
+      });
+
+      const uriResult = await Filesystem.getUri({
+        path: fileName,
+        directory: 'CACHE'
+      });
+
+      const choice = await new Promise((resolve) => {
+        const dialog = document.createElement('div');
+        dialog.style.cssText = 'position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px;direction:rtl;font-family:Cairo,sans-serif';
+        dialog.innerHTML = `
+          <div style="background:linear-gradient(180deg,#111a2c,#0a101e);border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:24px;max-width:420px;width:100%;color:#fff;text-align:center">
+            <div style="font-size:48px;margin-bottom:10px">📄</div>
+            <h3 style="margin:0 0 8px;font-size:18px;font-weight:900">الملف جاهز!</h3>
+            <p style="margin:0 0 20px;color:#8595b8;font-size:13px;line-height:1.8">
+              اختر الطريقة لحفظ الورقة كـ PDF
+            </p>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <button id="cPrint" style="padding:15px;border-radius:14px;border:none;background:linear-gradient(135deg,#22c55e,#0ea5e9);color:#04220f;font-family:Cairo,sans-serif;font-weight:900;font-size:15px;cursor:pointer">
+                🖨️ فتح في المتصفح (طباعة / PDF)
+              </button>
+              <button id="cShare" style="padding:15px;border-radius:14px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-family:Cairo,sans-serif;font-weight:800;font-size:14px;cursor:pointer">
+                📤 مشاركة الملف
+              </button>
+              <button id="cCancel" style="padding:10px;border-radius:12px;border:none;background:transparent;color:#8595b8;font-family:Cairo,sans-serif;font-weight:700;font-size:13px;cursor:pointer">
+                إلغاء
+              </button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(dialog);
+
+        dialog.querySelector('#cPrint').onclick = () => { dialog.remove(); resolve('print'); };
+        dialog.querySelector('#cShare').onclick = () => { dialog.remove(); resolve('share'); };
+        dialog.querySelector('#cCancel').onclick = () => { dialog.remove(); resolve('cancel'); };
+      });
+
+      if (choice === 'print') {
+        await Browser.open({ url: uriResult.uri });
+        toast('💡 في المتصفح: ⋮ → طباعة → حفظ ك PDF');
+      } else if (choice === 'share') {
+        await Share.share({
+          title: safeName,
+          text: safeName,
+          url: uriResult.uri,
+          dialogTitle: 'مشاركة الملف'
+        });
+      }
+
+    } catch (err) {
+      console.error('PDF Error:', err);
+      toast('⚠️ ' + (err.message || 'خطأ في الحفظ'));
+    }
+  } else {
+    const win = window.open('', '_blank');
+    if (win) {
+      win.document.write(fullHTML);
+      win.document.close();
+      setTimeout(() => { try { win.print(); } catch(e){} }, 900);
+    } else {
+      const blob = new Blob([fullHTML], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast('📥 تم تحميل الملف');
+    }
+  }
 }
 
 /* ============ PDF: ورقة الجلسة ============ */
