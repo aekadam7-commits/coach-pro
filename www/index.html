@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#05080f" />
-<title>مدرّبي Pro — Coach Command Center v4</title>
+<title>مدرّبي Pro — Coach Command Center v5</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
@@ -78,7 +78,6 @@ body > *{position:relative;z-index:1}
 .legend-card:nth-child(1){animation-delay:.3s}.legend-card:nth-child(2){animation-delay:.55s}.legend-card:nth-child(3){animation-delay:.8s}.legend-card:nth-child(4){animation-delay:1.05s}.legend-card:nth-child(5){animation-delay:1.3s}
 @keyframes cardIn{to{opacity:1;transform:translateY(0) scale(1)}}
 .legend-card:hover{transform:translateY(-8px) scale(1.03);border-color:var(--lc);box-shadow:0 20px 40px rgba(0,0,0,.5), 0 0 40px var(--lc);}
-
 .legend-avatar{width:84px;height:84px;border-radius:50%;margin:0 auto 12px;position:relative;display:grid;place-items:center;overflow:hidden;font-size:30px;font-weight:900;color:#fff;font-family:var(--mono);background:linear-gradient(140deg, var(--lc1), var(--lc2));box-shadow:0 10px 30px rgba(0,0,0,.5), inset 0 0 0 3px rgba(255,255,255,.18);}
 .legend-avatar::before{content:"";position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(from 0deg, var(--lc1), var(--lc2), var(--lc1));z-index:-1;opacity:.6;animation:spin 8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -87,7 +86,6 @@ body > *{position:relative;z-index:1}
 .legend-card .role{color:var(--lc1);font-size:9.5px;font-weight:800;margin:0 0 9px;letter-spacing:1.2px;text-transform:uppercase;font-family:var(--mono)}
 .legend-card .quote{font-size:10px;color:#94a3b8;font-style:italic;line-height:1.55;margin:0;min-height:42px}
 .legend-card .quote::before{content:"« "}.legend-card .quote::after{content:" »"}
-
 .splash-loading{margin-top:30px;width:min(340px,85vw);}
 .splash-loading .bar{height:3px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
 .splash-loading .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#22c55e,#38bdf8);border-radius:3px;box-shadow:0 0 20px rgba(34,197,94,.6);animation:load 30s linear forwards;}
@@ -197,6 +195,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .iconbtn{width:30px;height:30px;border-radius:9px;border:1px solid var(--brd);background:transparent;color:var(--muted);cursor:pointer;font-size:13px;display:grid;place-items:center;transition:.18s;}
 .iconbtn:hover{background:var(--glass2);color:var(--txt)}
 .iconbtn.del:hover{color:#dc2626;border-color:rgba(239,68,68,.45)}
+.iconbtn:disabled{opacity:.3;cursor:not-allowed}
 
 .chip-select{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
 .csel{font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;padding:8px 12px;border-radius:11px;border:1px solid var(--brd);background:var(--glass);color:var(--muted);transition:.18s;display:inline-flex;align-items:center;gap:5px;}
@@ -270,6 +269,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;heigh
 .att-tick.yes{background:linear-gradient(140deg,#22c55e,#16a34a);color:#fff;border-color:transparent;}
 .att-tick.no{background:rgba(239,68,68,.18);color:#dc2626;border-color:rgba(239,68,68,.4)}
 .att-tick.late{background:rgba(245,158,11,.2);color:#d97706;border-color:rgba(245,158,11,.42)}
+.att-reason{width:100%;padding:6px 9px;font-size:11.5px;border-radius:8px;background:var(--field);}
 
 .board-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:11px;padding:10px;border-radius:var(--r2);background:var(--glass);border:1px solid var(--brd);}
 .tgroup{display:flex;gap:5px;align-items:center;padding-inline:3px;flex-wrap:wrap}
@@ -420,151 +420,28 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
     <div class="splash-logo">⚽</div>
     <h1 class="splash-title">COACH PRO</h1>
     <p class="splash-sub">LEGENDS NEVER STOP LEARNING</p>
-
     <div class="legends-grid">
-      <!-- أنشيلوتي -->
       <div class="legend-card" style="--lc1:#dc2626;--lc2:#ea580c;--lc:rgba(220,38,38,.5)">
-        <div class="legend-avatar">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg">
-            <defs><linearGradient id="gCA" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#dc2626"/><stop offset="100%" stop-color="#ea580c"/></linearGradient></defs>
-            <rect width="100" height="100" fill="url(#gCA)"/>
-            <path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#1a2332"/>
-            <path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#f5f5f5"/>
-            <path d="M47,72 L50,75 L53,72 L52,90 L50,95 L48,90 Z" fill="#b91c1c"/>
-            <rect x="44" y="58" width="12" height="14" fill="#e8bd96"/>
-            <ellipse cx="50" cy="40" rx="18" ry="22" fill="#e8bd96"/>
-            <ellipse cx="31" cy="42" rx="3" ry="5" fill="#d9a97c"/>
-            <ellipse cx="69" cy="42" rx="3" ry="5" fill="#d9a97c"/>
-            <path d="M30,34 Q28,15 50,13 Q72,15 70,34 Q68,26 50,24 Q32,26 30,34 Z" fill="#c9ced6"/>
-            <rect x="34" y="37" width="13" height="10" rx="3" fill="rgba(200,220,255,.2)" stroke="#1a1a1a" stroke-width="1.5"/>
-            <rect x="53" y="37" width="13" height="10" rx="3" fill="rgba(200,220,255,.2)" stroke="#1a1a1a" stroke-width="1.5"/>
-            <line x1="47" y1="42" x2="53" y2="42" stroke="#1a1a1a" stroke-width="1.5"/>
-            <circle cx="41" cy="42" r="1.3" fill="#1a1a1a"/>
-            <circle cx="59" cy="42" r="1.3" fill="#1a1a1a"/>
-            <path d="M45,52 Q50,54 55,52" stroke="#8a5a3a" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>أنشيلوتي</h3>
-        <p class="role">MAESTRO</p>
-        <p class="quote">كرة القدم بسيطة، لكن اللعب البسيط هو الأصعب</p>
+        <div class="legend-avatar"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg"><defs><linearGradient id="gCA" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#dc2626"/><stop offset="100%" stop-color="#ea580c"/></linearGradient></defs><rect width="100" height="100" fill="url(#gCA)"/><path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#1a2332"/><path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#f5f5f5"/><rect x="44" y="58" width="12" height="14" fill="#e8bd96"/><ellipse cx="50" cy="40" rx="18" ry="22" fill="#e8bd96"/><path d="M30,34 Q28,15 50,13 Q72,15 70,34 Q68,26 50,24 Q32,26 30,34 Z" fill="#c9ced6"/><rect x="34" y="37" width="13" height="10" rx="3" fill="rgba(200,220,255,.2)" stroke="#1a1a1a" stroke-width="1.5"/><rect x="53" y="37" width="13" height="10" rx="3" fill="rgba(200,220,255,.2)" stroke="#1a1a1a" stroke-width="1.5"/><circle cx="41" cy="42" r="1.3" fill="#1a1a1a"/><circle cx="59" cy="42" r="1.3" fill="#1a1a1a"/></svg></div>
+        <h3>أنشيلوتي</h3><p class="role">MAESTRO</p><p class="quote">كرة القدم بسيطة، لكن اللعب البسيط هو الأصعب</p>
       </div>
-
-      <!-- غوارديولا -->
       <div class="legend-card" style="--lc1:#0ea5e9;--lc2:#38bdf8;--lc:rgba(14,165,233,.5)">
-        <div class="legend-avatar">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg">
-            <defs><linearGradient id="gPG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient></defs>
-            <rect width="100" height="100" fill="url(#gPG)"/>
-            <path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#111827"/>
-            <path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#f5f5f5"/>
-            <path d="M48,73 L50,76 L52,73 L52,82 L48,82 Z" fill="#111827"/>
-            <rect x="44" y="58" width="12" height="14" fill="#e8bd96"/>
-            <ellipse cx="50" cy="40" rx="18" ry="22" fill="#e8bd96"/>
-            <ellipse cx="31" cy="42" rx="3" ry="5" fill="#d9a97c"/>
-            <ellipse cx="69" cy="42" rx="3" ry="5" fill="#d9a97c"/>
-            <path d="M50,18 Q32,18 30,36 Q30,28 40,24 Q50,22 60,24 Q70,28 70,36 Q68,18 50,18 Z" fill="#d9a97c" opacity=".6"/>
-            <ellipse cx="41" cy="40" rx="2.5" ry="1.8" fill="#1a1a1a"/>
-            <ellipse cx="59" cy="40" rx="2.5" ry="1.8" fill="#1a1a1a"/>
-            <circle cx="41" cy="40" r="0.8" fill="#fff"/>
-            <circle cx="59" cy="40" r="0.8" fill="#fff"/>
-            <path d="M35,34 L47,35" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M53,35 L65,34" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M46,50 L50,52 L54,50" stroke="#8a5a3a" stroke-width="1" fill="none"/>
-          </svg>
-        </div>
-        <h3>غوارديولا</h3>
-        <p class="role">ARCHITECT</p>
-        <p class="quote">لا أدرّب اللاعبين على الفوز فقط، بل على الفهم</p>
+        <div class="legend-avatar"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg"><defs><linearGradient id="gPG" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0ea5e9"/><stop offset="100%" stop-color="#38bdf8"/></linearGradient></defs><rect width="100" height="100" fill="url(#gPG)"/><path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#111827"/><path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#f5f5f5"/><rect x="44" y="58" width="12" height="14" fill="#e8bd96"/><ellipse cx="50" cy="40" rx="18" ry="22" fill="#e8bd96"/><path d="M50,18 Q32,18 30,36 Q30,28 40,24 Q50,22 60,24 Q70,28 70,36 Q68,18 50,18 Z" fill="#d9a97c" opacity=".6"/><ellipse cx="41" cy="40" rx="2.5" ry="1.8" fill="#1a1a1a"/><ellipse cx="59" cy="40" rx="2.5" ry="1.8" fill="#1a1a1a"/><circle cx="41" cy="40" r="0.8" fill="#fff"/><circle cx="59" cy="40" r="0.8" fill="#fff"/></svg></div>
+        <h3>غوارديولا</h3><p class="role">ARCHITECT</p><p class="quote">لا أدرّب اللاعبين على الفوز فقط، بل على الفهم</p>
       </div>
-
-      <!-- زيدان -->
       <div class="legend-card" style="--lc1:#3b82f6;--lc2:#6366f1;--lc:rgba(59,130,246,.5)">
-        <div class="legend-avatar">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg">
-            <defs><linearGradient id="gZZ" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs>
-            <rect width="100" height="100" fill="url(#gZZ)"/>
-            <path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#0a0a0a"/>
-            <path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#f5f5f5"/>
-            <path d="M47,72 L50,75 L53,72 L52,92 L50,95 L48,92 Z" fill="#1e293b"/>
-            <rect x="44" y="58" width="12" height="14" fill="#d9a97c"/>
-            <ellipse cx="50" cy="40" rx="18" ry="22" fill="#d9a97c"/>
-            <ellipse cx="31" cy="42" rx="3" ry="5" fill="#c99a6c"/>
-            <ellipse cx="69" cy="42" rx="3" ry="5" fill="#c99a6c"/>
-            <path d="M50,18 Q33,18 31,36 Q31,28 41,24 Q50,22 59,24 Q69,28 69,36 Q67,18 50,18 Z" fill="#d9a97c" opacity=".5"/>
-            <ellipse cx="41" cy="40" rx="2.5" ry="1.8" fill="#1a1a1a"/>
-            <ellipse cx="59" cy="40" rx="2.5" ry="1.8" fill="#1a1a1a"/>
-            <circle cx="41" cy="40" r="0.8" fill="#fff"/>
-            <circle cx="59" cy="40" r="0.8" fill="#fff"/>
-            <path d="M35,34 L47,34" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M53,34 L65,34" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M46,52 Q50,53 54,52" stroke="#8a5a3a" stroke-width="1" fill="none"/>
-          </svg>
-        </div>
-        <h3>زين الدين زيدان</h3>
-        <p class="role">ELEGANCE</p>
-        <p class="quote">الهدوء في الملعب أقوى من أي صرخة</p>
+        <div class="legend-avatar"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg"><defs><linearGradient id="gZZ" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3b82f6"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs><rect width="100" height="100" fill="url(#gZZ)"/><path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#0a0a0a"/><path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#f5f5f5"/><rect x="44" y="58" width="12" height="14" fill="#d9a97c"/><ellipse cx="50" cy="40" rx="18" ry="22" fill="#d9a97c"/><path d="M50,18 Q33,18 31,36 Q31,28 41,24 Q50,22 59,24 Q69,28 69,36 Q67,18 50,18 Z" fill="#d9a97c" opacity=".5"/><ellipse cx="41" cy="40" rx="2.5" ry="1.8" fill="#1a1a1a"/><ellipse cx="59" cy="40" rx="2.5" ry="1.8" fill="#1a1a1a"/><circle cx="41" cy="40" r="0.8" fill="#fff"/><circle cx="59" cy="40" r="0.8" fill="#fff"/></svg></div>
+        <h3>زين الدين زيدان</h3><p class="role">ELEGANCE</p><p class="quote">الهدوء في الملعب أقوى من أي صرخة</p>
       </div>
-
-      <!-- ميسي -->
       <div class="legend-card" style="--lc1:#a855f7;--lc2:#ec4899;--lc:rgba(168,85,247,.5)">
-        <div class="legend-avatar">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg">
-            <defs><linearGradient id="gLM" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#ec4899"/></linearGradient></defs>
-            <rect width="100" height="100" fill="url(#gLM)"/>
-            <path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#75aadb"/>
-            <path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#f5f5f5"/>
-            <rect x="30" y="68" width="4" height="20" fill="#ffffff" transform="rotate(6 32 78)"/>
-            <rect x="66" y="68" width="4" height="20" fill="#ffffff" transform="rotate(-6 68 78)"/>
-            <text x="50" y="84" text-anchor="middle" font-family="monospace" font-weight="900" font-size="9" fill="#1a1a1a">10</text>
-            <rect x="44" y="58" width="12" height="14" fill="#e8bd96"/>
-            <ellipse cx="50" cy="40" rx="17" ry="21" fill="#e8bd96"/>
-            <ellipse cx="32" cy="42" rx="3" ry="5" fill="#d9a97c"/>
-            <ellipse cx="68" cy="42" rx="3" ry="5" fill="#d9a97c"/>
-            <path d="M31,36 Q30,17 50,15 Q70,17 69,36 Q68,24 60,22 Q50,20 40,22 Q32,24 31,36 Z" fill="#2a1810"/>
-            <ellipse cx="41" cy="41" rx="2.3" ry="1.7" fill="#1a1a1a"/>
-            <ellipse cx="59" cy="41" rx="2.3" ry="1.7" fill="#1a1a1a"/>
-            <circle cx="41" cy="41" r="0.7" fill="#fff"/>
-            <circle cx="59" cy="41" r="0.7" fill="#fff"/>
-            <path d="M35,36 L47,36" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M53,36 L65,36" stroke="#1a1a1a" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M45,52 Q50,54 55,52" stroke="#8a5a3a" stroke-width="1.2" fill="none"/>
-          </svg>
-        </div>
-        <h3>ليونيل ميسي</h3>
-        <p class="role">THE GOAT</p>
-        <p class="quote">الكرة تلتصق بقدمي كما لو أنها جزء مني</p>
+        <div class="legend-avatar"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg"><defs><linearGradient id="gLM" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a855f7"/><stop offset="100%" stop-color="#ec4899"/></linearGradient></defs><rect width="100" height="100" fill="url(#gLM)"/><path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#75aadb"/><path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#f5f5f5"/><text x="50" y="84" text-anchor="middle" font-family="monospace" font-weight="900" font-size="9" fill="#1a1a1a">10</text><rect x="44" y="58" width="12" height="14" fill="#e8bd96"/><ellipse cx="50" cy="40" rx="17" ry="21" fill="#e8bd96"/><path d="M31,36 Q30,17 50,15 Q70,17 69,36 Q68,24 60,22 Q50,20 40,22 Q32,24 31,36 Z" fill="#2a1810"/><ellipse cx="41" cy="41" rx="2.3" ry="1.7" fill="#1a1a1a"/><ellipse cx="59" cy="41" rx="2.3" ry="1.7" fill="#1a1a1a"/><circle cx="41" cy="41" r="0.7" fill="#fff"/><circle cx="59" cy="41" r="0.7" fill="#fff"/></svg></div>
+        <h3>ليونيل ميسي</h3><p class="role">THE GOAT</p><p class="quote">الكرة تلتصق بقدمي كما لو أنها جزء مني</p>
       </div>
-
-      <!-- رونالدو -->
       <div class="legend-card" style="--lc1:#f59e0b;--lc2:#ef4444;--lc:rgba(245,158,11,.5)">
-        <div class="legend-avatar">
-          <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg">
-            <defs><linearGradient id="gCR" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#ef4444"/></linearGradient></defs>
-            <rect width="100" height="100" fill="url(#gCR)"/>
-            <path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#c8102e"/>
-            <path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#006847"/>
-            <text x="50" y="84" text-anchor="middle" font-family="monospace" font-weight="900" font-size="9" fill="#ffffff">7</text>
-            <rect x="44" y="58" width="12" height="14" fill="#e8bd96"/>
-            <ellipse cx="50" cy="40" rx="17" ry="21" fill="#e8bd96"/>
-            <ellipse cx="32" cy="42" rx="3" ry="5" fill="#d9a97c"/>
-            <ellipse cx="68" cy="42" rx="3" ry="5" fill="#d9a97c"/>
-            <path d="M31,35 Q30,16 50,14 Q70,16 69,35 Q66,22 60,21 Q50,19 40,21 Q34,22 31,35 Z" fill="#1a1a1a"/>
-            <path d="M52,20 Q66,22 70,34 Q72,26 66,22 Q60,18 50,18 Z" fill="#1a1a1a"/>
-            <ellipse cx="41" cy="41" rx="2.5" ry="1.9" fill="#1a1a1a"/>
-            <ellipse cx="59" cy="41" rx="2.5" ry="1.9" fill="#1a1a1a"/>
-            <circle cx="41" cy="41" r="0.8" fill="#fff"/>
-            <circle cx="59" cy="41" r="0.8" fill="#fff"/>
-            <path d="M35,36 L47,36" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M53,36 L65,36" stroke="#1a1a1a" stroke-width="1.6" stroke-linecap="round"/>
-            <path d="M45,51 Q50,54 55,51" stroke="#8a5a3a" stroke-width="1.2" fill="none"/>
-          </svg>
-        </div>
-        <h3>كريستيانو رونالدو</h3>
-        <p class="role">RELENTLESS</p>
-        <p class="quote">الموهبة بلا عمل لا شيء، والعمل يصنع الأساطير</p>
+        <div class="legend-avatar"><svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" class="avatar-svg"><defs><linearGradient id="gCR" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#ef4444"/></linearGradient></defs><rect width="100" height="100" fill="url(#gCR)"/><path d="M8,100 Q10,72 30,64 L50,73 L70,64 Q90,72 92,100 Z" fill="#c8102e"/><path d="M42,66 L50,73 L58,66 L58,85 L42,85 Z" fill="#006847"/><text x="50" y="84" text-anchor="middle" font-family="monospace" font-weight="900" font-size="9" fill="#ffffff">7</text><rect x="44" y="58" width="12" height="14" fill="#e8bd96"/><ellipse cx="50" cy="40" rx="17" ry="21" fill="#e8bd96"/><path d="M31,35 Q30,16 50,14 Q70,16 69,35 Q66,22 60,21 Q50,19 40,21 Q34,22 31,35 Z" fill="#1a1a1a"/><ellipse cx="41" cy="41" rx="2.5" ry="1.9" fill="#1a1a1a"/><ellipse cx="59" cy="41" rx="2.5" ry="1.9" fill="#1a1a1a"/><circle cx="41" cy="41" r="0.8" fill="#fff"/><circle cx="59" cy="41" r="0.8" fill="#fff"/></svg></div>
+        <h3>كريستيانو رونالدو</h3><p class="role">RELENTLESS</p><p class="quote">الموهبة بلا عمل لا شيء، والعمل يصنع الأساطير</p>
       </div>
     </div>
-
     <div class="splash-loading">
       <div class="bar"><i></i></div>
       <p id="splashLoadText">جاري التحميل... <span id="splashTimer">30</span>s</p>
@@ -577,10 +454,7 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
   <div class="topbar-inner">
     <div class="brand">
       <div class="logo">⚽</div>
-      <div>
-        <h1>مدرّبي PRO</h1>
-        <span>COACH COMMAND CENTER</span>
-      </div>
+      <div><h1>مدرّبي PRO</h1><span>COACH COMMAND CENTER</span></div>
     </div>
     <div class="clock-box">
       <div class="clock-time" id="clockTime">--:--:--</div>
@@ -591,8 +465,10 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
       <button class="tab" data-view="players"><span class="ico">👥</span> اللاعبون</button>
       <button class="tab" data-view="trainings"><span class="ico">📈</span> تقييم التدريب</button>
       <button class="tab" data-view="matches"><span class="ico">⚽</span> المباريات</button>
+      <button class="tab" data-view="techsheet"><span class="ico">📄</span> الورقة التقنية</button>
+      <button class="tab" data-view="reports"><span class="ico">📊</span> التقارير</button>
       <button class="tab" data-view="attendance"><span class="ico">✅</span> الحضور</button>
-      <button class="tab" data-view="analysis"><span class="ico">📊</span> التحليل</button>
+      <button class="tab" data-view="analysis"><span class="ico">📉</span> التحليل</button>
       <button class="tab" data-view="compare"><span class="ico">⚖️</span> مقارنة</button>
       <button class="tab" data-view="drills"><span class="ico">📋</span> البرامج</button>
       <button class="tab" data-view="tactics"><span class="ico">🧲</span> التكتيك</button>
@@ -609,9 +485,9 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
   <div class="bottom-inner">
     <button class="bnav-btn active" data-view="home"><span class="ico">🏠</span><span class="lbl">الرئيسية</span></button>
     <button class="bnav-btn" data-view="players"><span class="ico">👥</span><span class="lbl">اللاعبون</span></button>
-    <button class="bnav-btn" data-view="trainings"><span class="ico">📈</span><span class="lbl">تقييم التدريب</span></button>
+    <button class="bnav-btn" data-view="techsheet"><span class="ico">📄</span><span class="lbl">الورقة التقنية</span></button>
+    <button class="bnav-btn" data-view="reports"><span class="ico">📊</span><span class="lbl">التقارير</span></button>
     <button class="bnav-btn" data-view="matches"><span class="ico">⚽</span><span class="lbl">المباريات</span></button>
-    <button class="bnav-btn" data-view="tactics"><span class="ico">🧲</span><span class="lbl">التكتيك</span></button>
     <button class="bnav-btn" data-view="more"><span class="ico">⋯</span><span class="lbl">المزيد</span></button>
   </div>
 </nav>
@@ -622,7 +498,7 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
   <section class="view active" id="view-home">
     <div class="hero">
       <h2>أهلاً بك يا مدرب 👋</h2>
-      <p>إدارة كاملة: التقييم بعد كل حصة ومباراة، التشكيلة التلقائية، حلّ المشاكل — كل شيء في مكان واحد.</p>
+      <p>إدارة كاملة: التقييم بعد كل حصة ومباراة، التشكيلة التلقائية، حلّ المشاكل، التقارير القابلة للحفظ PDF.</p>
     </div>
     <div class="stats-grid">
       <div class="stat"><span class="ico">👥</span><b id="statPlayers">0</b><small>لاعب مسجّل</small></div>
@@ -633,11 +509,13 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
     </div>
     <h3 class="sec-title">اختصارات</h3>
     <div class="quick-grid">
+      <button class="quick" data-goto="techsheet"><span>📄</span> الورقة التقنية</button>
       <button class="quick" data-goto="trainings"><span>📈</span> قيّم حصة تدريب</button>
       <button class="quick" data-goto="matches"><span>⚽</span> سجّل مباراة</button>
+      <button class="quick" data-goto="reports"><span>📊</span> تقارير المباريات</button>
       <button class="quick" data-goto="players"><span>➕</span> أضف لاعباً</button>
       <button class="quick" data-goto="tactics"><span>🧲</span> ارسم خطة</button>
-      <button class="quick" data-goto="analysis"><span>📊</span> حلّل فريقك</button>
+      <button class="quick" data-goto="analysis"><span>📉</span> حلّل فريقك</button>
       <button class="quick" data-goto="attendance"><span>✅</span> سجّل الحضور</button>
     </div>
     <h3 class="sec-title">⭐ أفضل اللاعبين <span class="count" id="topCount"></span></h3>
@@ -663,10 +541,7 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
 
   <!-- TRAININGS -->
   <section class="view" id="view-trainings">
-    <div class="hero">
-      <h2>📈 تقييم التدريبات</h2>
-      <p>بعد كل حصة تدريبية، قيّم كل لاعب في 6 مهارات. هذه التقييمات تُبنى عليها التشكيلة والتحليل.</p>
-    </div>
+    <div class="hero"><h2>📈 تقييم التدريبات</h2><p>بعد كل حصة تدريبية، قيّم كل لاعب في 6 مهارات.</p></div>
     <div class="toolbar">
       <button class="btn primary" id="btnNewTraining">➕ تقييم حصة جديدة</button>
       <button class="btn ghost" data-goto="attendance">✅ الحضور</button>
@@ -676,22 +551,72 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
 
   <!-- MATCHES -->
   <section class="view" id="view-matches">
-    <div class="hero">
-      <h2>⚽ المباريات الأسبوعية</h2>
-      <p>كل أسبوع مباراة رسمية. الكود يقترح التشكيلة، أنت تسجّل النتيجة والمشاكل، ثم يقترح الحلول ويقيّم اللاعبين.</p>
-    </div>
+    <div class="hero"><h2>⚽ المباريات الأسبوعية</h2><p>الكود يقترح التشكيلة، سجّل النتيجة والمشاكل، ثم اطبع التقرير.</p></div>
     <div class="toolbar">
       <button class="btn primary" id="btnNewMatch">➕ مباراة جديدة</button>
     </div>
     <div id="matchesList"></div>
   </section>
 
+  <!-- TECH SHEET -->
+  <section class="view" id="view-techsheet">
+    <div class="hero">
+      <h2>📄 الورقة التقنية للجلسة التدريبية</h2>
+      <p>برمج يومك التدريبي: اختر الحصص، حدّد الوقت الكلي ووقت كل حصة، ثم احفظ ورقة PDF جاهزة.</p>
+    </div>
+    <h3 class="sec-title">1️⃣ معلومات الجلسة</h3>
+    <div class="analysis-card">
+      <div class="form-grid">
+        <label>تاريخ الجلسة<input type="date" id="ts-date" /></label>
+        <label>اسم الجلسة / الموضوع<input id="ts-title" placeholder="مثال: تطوير التمرير والاستحواذ" /></label>
+        <label>الفئة<select id="ts-category"></select></label>
+        <label>الملعب<input id="ts-field" placeholder="مثال: ملعب الحي" /></label>
+        <label>الوقت الكلي (دقيقة)<input type="number" id="ts-total" min="30" max="180" value="90" /></label>
+        <label>عدد اللاعبين المتوقع<input type="number" id="ts-players" min="1" value="16" /></label>
+        <label class="full">الهدف الرئيسي<textarea id="ts-goal" rows="2" placeholder="مثال: تحسين التمرير السريع والتحرك بدون كرة"></textarea></label>
+      </div>
+    </div>
+
+    <h3 class="sec-title">2️⃣ اختر الحصص <span class="count" id="ts-chosen-count"></span></h3>
+    <div class="toolbar">
+      <div class="grow"><input id="ts-search" placeholder="🔍 ابحث في البرامج..." /></div>
+      <select id="ts-cat-filter" style="max-width:200px"></select>
+    </div>
+    <div class="filters" id="ts-drill-filters"></div>
+    <div id="ts-drills-list"></div>
+
+    <h3 class="sec-title">3️⃣ ترتيب الجلسة <span class="count" id="ts-selected-count"></span></h3>
+    <div class="toolbar">
+      <span style="color:var(--muted);font-size:12.5px">💡 اضغط على أي تمرين لتعديل وقته، ورتّب الجلسة بالأسهم.</span>
+      <span style="flex:1"></span>
+      <span class="chip" id="ts-total-time" style="padding:6px 14px;font-size:13px;font-weight:800">⏱ 0 دقيقة</span>
+    </div>
+    <div id="ts-selected-list"></div>
+
+    <h3 class="sec-title">4️⃣ حفظ PDF</h3>
+    <div class="quick-grid">
+      <button class="quick" id="btnPrintSession"><span>📄</span> حفظ ورقة الجلسة PDF</button>
+      <button class="quick" id="btnPrintAttendance"><span>👥</span> حفظ تقرير حضور اللاعبين PDF</button>
+      <button class="quick" id="btnPrintBlank"><span>📋</span> حفظ ورقة فارغة PDF</button>
+    </div>
+  </section>
+
+  <!-- REPORTS -->
+  <section class="view" id="view-reports">
+    <div class="hero">
+      <h2>📊 تقارير المباريات</h2>
+      <p>اختر مباراة لعرض تقرير كامل: الأساسيون، الاحتياطيون، الغائبون مع الأسباب — جاهز للحفظ ك PDF.</p>
+    </div>
+    <div class="toolbar">
+      <select id="report-match-sel" class="grow"></select>
+      <button class="btn primary" id="btnPrintMatchReport">📄 حفظ PDF</button>
+    </div>
+    <div id="reportContent"></div>
+  </section>
+
   <!-- ATTENDANCE -->
   <section class="view" id="view-attendance">
-    <div class="hero">
-      <h2>✅ سجل الحضور</h2>
-      <p>اضغط الخانة لتبديل الحالة (حاضر / متأخر / غائب)</p>
-    </div>
+    <div class="hero"><h2>✅ سجل الحضور</h2><p>اضغط الخانة لتبديل الحالة، واكتب سبب الغياب.</p></div>
     <div class="toolbar">
       <div class="grow"><input id="attDate" type="date" /></div>
       <button class="btn" id="btnAttToday">اليوم</button>
@@ -707,10 +632,7 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
   <!-- COMPARE -->
   <section class="view" id="view-compare">
     <div class="hero"><h2>⚖️ مقارنة اللاعبين</h2><p>اختر لاعبَين للمقارنة</p></div>
-    <div class="toolbar">
-      <select id="cmpP1" class="grow"></select>
-      <select id="cmpP2" class="grow"></select>
-    </div>
+    <div class="toolbar"><select id="cmpP1" class="grow"></select><select id="cmpP2" class="grow"></select></div>
     <div id="compareContent"></div>
   </section>
 
@@ -728,17 +650,15 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
   <section class="view" id="view-tactics">
     <div class="board-tools">
       <div class="tgroup">
-        <button class="tool active" data-tool="select" title="تحريك">✋</button>
-        <button class="tool" data-tool="pen" title="قلم">✏️</button>
-        <button class="tool" data-tool="arrow" title="سهم">➡️</button>
-        <button class="tool" data-tool="line" title="خط">╱</button>
-        <button class="tool" data-tool="circle" title="دائرة">⭕</button>
-        <button class="tool" data-tool="eraser" title="ممحاة">🧽</button>
+        <button class="tool active" data-tool="select">✋</button>
+        <button class="tool" data-tool="pen">✏️</button>
+        <button class="tool" data-tool="arrow">➡️</button>
+        <button class="tool" data-tool="line">╱</button>
+        <button class="tool" data-tool="circle">⭕</button>
+        <button class="tool" data-tool="eraser">🧽</button>
       </div>
       <div class="tgroup" id="swatches"></div>
-      <div class="tgroup">
-        <input type="range" id="penSize" min="1" max="10" value="4" style="width:70px" />
-      </div>
+      <div class="tgroup"><input type="range" id="penSize" min="1" max="10" value="4" style="width:70px" /></div>
       <div class="tgroup">
         <button class="tool" id="btnUndo">↩️</button>
         <button class="tool" id="btnClearDraw">🗑️</button>
@@ -762,7 +682,6 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
       </div>
     </div>
     <div class="board-wrap" id="boardWrap"><canvas id="board"></canvas></div>
-    <p style="color:var(--muted);font-size:12px;text-align:center;margin-top:10px">💡 اختر ✋ لتحريك اللاعبين</p>
   </section>
 
   <!-- TIMER -->
@@ -790,7 +709,7 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
       <div class="timer-sub" id="timerSub">جاهز للبدء</div>
       <div class="timer-ctrl">
         <button class="btn primary" id="btnStart">▶ بدء</button>
-        <button class="btn" id="btnLap">⏲️ لفّة</button>
+        <button class="btn" id="btnLap">Ⲵ لفّة</button>
         <button class="btn ghost" id="btnReset">↺ تصفير</button>
       </div>
       <div class="presets" id="presets">
@@ -807,29 +726,15 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
   <section class="view" id="view-contact">
     <div class="contact-hero">
       <h2>📞 تواصل معنا</h2>
-      <p>نحن هنا لمساعدتك في كل ما يخص التطبيق — لا تتردد في التواصل معنا في أي وقت.</p>
+      <p>نحن هنا لمساعدتك في كل ما يخص التطبيق.</p>
     </div>
-
     <h3 class="sec-title">طرق التواصل</h3>
     <div class="contact-grid">
-      <a class="contact-card" href="tel:+213776117083" style="--cc:rgba(34,197,94,.4)">
-        <div class="cico">📱</div><div class="ctitle">الهاتف</div>
-        <div class="cval">0776 11 70 83</div><div class="cdesc">اتصال مباشر</div>
-      </a>
-      <a class="contact-card" href="https://wa.me/213776117083" target="_blank" rel="noopener" style="--cc:rgba(37,211,102,.5)">
-        <div class="cico">💚</div><div class="ctitle">واتساب</div>
-        <div class="cval">0776 11 70 83</div><div class="cdesc">رد سريع خلال دقائق</div>
-      </a>
-      <a class="contact-card" href="mailto:aissaallel@gmail.com" style="--cc:rgba(56,189,248,.4)">
-        <div class="cico">✉️</div><div class="ctitle">البريد الإلكتروني</div>
-        <div class="cval">aissaallel@gmail.com</div><div class="cdesc">للاستفسارات والاقتراحات</div>
-      </a>
-      <a class="contact-card" href="https://instagram.com/coachpro" target="_blank" rel="noopener" style="--cc:rgba(236,72,153,.4)">
-        <div class="cico">📸</div><div class="ctitle">إنستغرام</div>
-        <div class="cval">@coachpro</div><div class="cdesc">آخر التحديثات</div>
-      </a>
+      <a class="contact-card" href="tel:+213776117083" style="--cc:rgba(34,197,94,.4)"><div class="cico">📱</div><div class="ctitle">الهاتف</div><div class="cval">0776 11 70 83</div><div class="cdesc">اتصال مباشر</div></a>
+      <a class="contact-card" href="https://wa.me/213776117083" target="_blank" rel="noopener" style="--cc:rgba(37,211,102,.5)"><div class="cico">💚</div><div class="ctitle">واتساب</div><div class="cval">0776 11 70 83</div><div class="cdesc">رد سريع</div></a>
+      <a class="contact-card" href="mailto:aissaallel@gmail.com" style="--cc:rgba(56,189,248,.4)"><div class="cico">✉️</div><div class="ctitle">البريد</div><div class="cval">aissaallel@gmail.com</div><div class="cdesc">للاستفسارات</div></a>
+      <a class="contact-card" href="https://instagram.com/coachpro" target="_blank" rel="noopener" style="--cc:rgba(236,72,153,.4)"><div class="cico">📸</div><div class="ctitle">إنستغرام</div><div class="cval">@coachpro</div><div class="cdesc">آخر التحديثات</div></a>
     </div>
-
     <h3 class="sec-title">🔗 روابط سريعة</h3>
     <div class="analysis-card">
       <div style="display:flex;flex-direction:column;gap:8px">
@@ -838,7 +743,6 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
         <div class="copy-row"><span class="val">+213776117083</span><button class="copy-btn" onclick="copyText('+213776117083',this)">نسخ</button></div>
       </div>
     </div>
-
     <h3 class="sec-title">💝 إهداء</h3>
     <div class="dedication-card">
       <div class="heart-icon">❤️</div>
@@ -847,19 +751,9 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
       <p style="margin-top:20px;padding-top:20px;border-top:1px dashed rgba(168,85,247,.3)">
         إلى من يقف كل صباح في الملعب قبل الجميع، ويغادر بعد الجميع.<br>
         إلى من يرسم الخطط على الورق، وعلى قلوب الصغار قبل الملعب.<br>
-        إلى من يرى في كل طفل بذرة بطل، وفي كل تمريرة بداية حلم.<br>
         إلى كل مدرب يصنع أجيال الغد بحب وصبر — هذا العمل لك. ⚽💚
       </p>
       <p class="signature">— بكل حب وإمتنان، عيسى علال</p>
-    </div>
-
-    <h3 class="sec-title">ℹ️ عن التطبيق</h3>
-    <div class="analysis-card">
-      <p style="margin:0;line-height:1.9;color:var(--muted);font-size:13px">
-        <b style="color:var(--txt)">مدرّبي Pro — الإصدار 4.0</b><br>
-        مركز قيادة شامل: تقييم بعد كل حصة ومباراة، تشكيلة تلقائية، حلّ مشاكل الأداء.<br>
-        التخزين محلي في متصفحك — لا يحتاج إنترنت بعد التحميل.
-      </p>
     </div>
   </section>
 
@@ -881,12 +775,14 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
 
   <!-- MORE (mobile) -->
   <section class="view" id="view-more">
-    <div class="hero"><h2>⋯ المزيد</h2><p>اختر الصفحة</p></div>
+    <div class="hero"><h2>⋯ المزيد</h2></div>
     <div class="quick-grid">
+      <button class="quick" data-goto="trainings"><span>📈</span> تقييم التدريب</button>
       <button class="quick" data-goto="attendance"><span>✅</span> الحضور</button>
-      <button class="quick" data-goto="analysis"><span>📊</span> التحليل</button>
+      <button class="quick" data-goto="analysis"><span>📉</span> التحليل</button>
       <button class="quick" data-goto="compare"><span>⚖️</span> المقارنة</button>
       <button class="quick" data-goto="drills"><span>📋</span> البرامج</button>
+      <button class="quick" data-goto="tactics"><span>🧲</span> التكتيك</button>
       <button class="quick" data-goto="timer"><span>⏱️</span> المؤقّت</button>
       <button class="quick" data-goto="contact"><span>📞</span> تواصل</button>
       <button class="quick" data-goto="settings"><span>⚙️</span> الإعدادات</button>
@@ -903,7 +799,6 @@ footer{margin-top:40px;padding:32px 16px 24px;border-top:1px solid var(--brd);ba
 </footer>
 
 <div class="modal-backdrop" id="modalBackdrop"><div class="modal" id="modal"></div></div>
-
 <script>
 /* ============ HELPERS ============ */
 const $=s=>document.querySelector(s);
@@ -970,12 +865,12 @@ const PROBLEMS=[
 ];
 
 const FORMATIONS_11={
-  '4-4-2':{gk:1,def:4,mid:4,fwd:2,positions:[[50,92,'gk'],[15,72,'def'],[38,72,'def'],[62,72,'def'],[85,72,'def'],[15,48,'mid'],[38,48,'mid'],[62,48,'mid'],[85,48,'mid'],[38,18,'fwd'],[62,18,'fwd']]},
-  '4-3-3':{gk:1,def:4,mid:3,fwd:3,positions:[[50,92,'gk'],[15,72,'def'],[38,72,'def'],[62,72,'def'],[85,72,'def'],[25,50,'mid'],[50,50,'mid'],[75,50,'mid'],[20,20,'fwd'],[50,20,'fwd'],[80,20,'fwd']]},
-  '4-2-3-1':{gk:1,def:4,mid:5,fwd:1,positions:[[50,92,'gk'],[15,72,'def'],[38,72,'def'],[62,72,'def'],[85,72,'def'],[35,55,'mid'],[65,55,'mid'],[20,38,'mid'],[50,38,'mid'],[80,38,'mid'],[50,15,'fwd']]},
-  '3-5-2':{gk:1,def:3,mid:5,fwd:2,positions:[[50,92,'gk'],[25,72,'def'],[50,72,'def'],[75,72,'def'],[10,50,'mid'],[30,50,'mid'],[50,50,'mid'],[70,50,'mid'],[90,50,'mid'],[38,20,'fwd'],[62,20,'fwd']]},
-  '5-3-2':{gk:1,def:5,mid:3,fwd:2,positions:[[50,92,'gk'],[10,75,'def'],[30,75,'def'],[50,75,'def'],[70,75,'def'],[90,75,'def'],[25,50,'mid'],[50,50,'mid'],[75,50,'mid'],[38,22,'fwd'],[62,22,'fwd']]},
-  '4-5-1':{gk:1,def:4,mid:5,fwd:1,positions:[[50,92,'gk'],[15,72,'def'],[38,72,'def'],[62,72,'def'],[85,72,'def'],[10,50,'mid'],[30,50,'mid'],[50,50,'mid'],[70,50,'mid'],[90,50,'mid'],[50,18,'fwd']]}
+  '4-4-2':{positions:[[50,92,'gk'],[15,72,'def'],[38,72,'def'],[62,72,'def'],[85,72,'def'],[15,48,'mid'],[38,48,'mid'],[62,48,'mid'],[85,48,'mid'],[38,18,'fwd'],[62,18,'fwd']]},
+  '4-3-3':{positions:[[50,92,'gk'],[15,72,'def'],[38,72,'def'],[62,72,'def'],[85,72,'def'],[25,50,'mid'],[50,50,'mid'],[75,50,'mid'],[20,20,'fwd'],[50,20,'fwd'],[80,20,'fwd']]},
+  '4-2-3-1':{positions:[[50,92,'gk'],[15,72,'def'],[38,72,'def'],[62,72,'def'],[85,72,'def'],[35,55,'mid'],[65,55,'mid'],[20,38,'mid'],[50,38,'mid'],[80,38,'mid'],[50,15,'fwd']]},
+  '3-5-2':{positions:[[50,92,'gk'],[25,72,'def'],[50,72,'def'],[75,72,'def'],[10,50,'mid'],[30,50,'mid'],[50,50,'mid'],[70,50,'mid'],[90,50,'mid'],[38,20,'fwd'],[62,20,'fwd']]},
+  '5-3-2':{positions:[[50,92,'gk'],[10,75,'def'],[30,75,'def'],[50,75,'def'],[70,75,'def'],[90,75,'def'],[25,50,'mid'],[50,50,'mid'],[75,50,'mid'],[38,22,'fwd'],[62,22,'fwd']]},
+  '4-5-1':{positions:[[50,92,'gk'],[15,72,'def'],[38,72,'def'],[62,72,'def'],[85,72,'def'],[10,50,'mid'],[30,50,'mid'],[50,50,'mid'],[70,50,'mid'],[90,50,'mid'],[50,18,'fwd']]}
 };
 
 /* ============ DATA ============ */
@@ -984,7 +879,10 @@ let drills=store.get('coach_drills',[]);
 let trainings=store.get('coach_trainings',[]);
 let matches=store.get('coach_matches',[]);
 let attendance=store.get('coach_attendance',{});
-let uiFilters={drillCat:'all',playerCat:'all',playerPos:'all',playerFoot:'all'};
+let absenceReasons=store.get('coach_absence_reasons',{});
+let matchAbsenceReasons=store.get('coach_match_absences',{});
+let tsSelected=store.get('coach_ts_selected',[]);
+let uiFilters={drillCat:'all',playerCat:'all',playerPos:'all',playerFoot:'all',tsCat:'all'};
 
 const DEFAULT_DRILLS=[
   {id:'d1',title:'التسخين الديناميكي',cat:'تسخين',min:10,players:16,desc:'تفعيل الجسم قبل الحصة.',steps:['جري خفيف','دوران المفاصل','قفزات','تمريرات سريعة']},
@@ -1092,6 +990,8 @@ function showView(name){
   if(name==='players')renderPlayers();
   if(name==='trainings')renderTrainings();
   if(name==='matches')renderMatches();
+  if(name==='techsheet'){initTechSheet();renderTsDrills();renderTsSelected();}
+  if(name==='reports')renderReports();
   if(name==='attendance')renderAttendance();
   if(name==='analysis')renderAnalysis();
   if(name==='compare')renderCompare();
@@ -1331,7 +1231,7 @@ function openPlayerDetail(id){
 function renderTrainings(){
   const box=$('#trainingsList');
   if(!trainings.length){
-    box.innerHTML=`<div class="empty"><span class="big">📈</span>لا توجد حصص تقييم بعد.<br>أضف أول تقييم بعد انتهاء الحصة.</div>`;
+    box.innerHTML=`<div class="empty"><span class="big">📈</span>لا توجد حصص تقييم بعد.</div>`;
     return;
   }
   const sorted=trainings.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
@@ -1430,7 +1330,7 @@ $('#btnNewTraining').addEventListener('click',()=>{
 function renderMatches(){
   const box=$('#matchesList');
   if(!matches.length){
-    box.innerHTML=`<div class="empty"><span class="big">⚽</span>لا توجد مباريات بعد.<br>أضف أول مباراة أسبوعية.</div>`;
+    box.innerHTML=`<div class="empty"><span class="big">⚽</span>لا توجد مباريات بعد.</div>`;
     return;
   }
   const sorted=matches.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
@@ -1456,6 +1356,7 @@ function renderMatches(){
       <div style="display:flex;gap:7px;margin-top:11px;flex-wrap:wrap">
         <button class="btn small primary" onclick="openMatchForm('${m.id}')">👁️ عرض/تعديل</button>
         <button class="btn small" onclick="viewMatchLineup('${m.id}')">📋 التشكيلة</button>
+        <button class="btn small" onclick="showView('reports');setTimeout(()=>{const s=document.getElementById('report-match-sel');if(s){s.value='${m.id}';renderReports();}},150)">📊 تقرير</button>
         <button class="btn small danger" onclick="deleteMatch('${m.id}')">🗑️</button>
       </div>
     </div>`;
@@ -1513,26 +1414,24 @@ function openMatchForm(id){
     <div class="form-grid">
       <label>التاريخ<input type="date" id="m-date" value="${date}" /></label>
       <label>الخصم<input id="m-opponent" value="${esc(opponent)}" placeholder="اسم الفريق الخصم" /></label>
-      <label>التشكيلة المقترحة
+      <label>التشكيلة
         <select id="m-formation">${Object.keys(FORMATIONS_11).map(f=>`<option value="${f}" ${formation===f?'selected':''}>${f}</option>`).join('')}</select>
       </label>
       <label>نتيجتنا<input type="number" id="m-our" min="0" value="${ourScore}" /></label>
       <label>نتيجة الخصم<input type="number" id="m-their" min="0" value="${theirScore}" /></label>
     </div>
 
-    <h3 style="margin-top:20px;margin-bottom:8px;font-size:14px">📋 التشكيلة المقترحة (الأعلى تقييماً)</h3>
+    <h3 style="margin-top:20px;margin-bottom:8px;font-size:14px">📋 التشكيلة المقترحة</h3>
     <div id="lineupPreview">${renderLineupHTML(formation,lineup,'التشكيلة المقترحة')}</div>
-    <p style="font-size:11.5px;color:var(--muted);text-align:center;margin:6px 0 0">💡 يعتمد على متوسط التدريبات والمباريات (60% مباريات + 40% تدريب)</p>
 
-    <h3 style="margin-top:20px;margin-bottom:8px;font-size:14px">⚠️ المشاكل التي لاحظتها</h3>
+    <h3 style="margin-top:20px;margin-bottom:8px;font-size:14px">⚠️ المشاكل</h3>
     <div class="problem-grid" id="m-problems">
       ${PROBLEMS.map(pr=>`<button type="button" class="problem-chip ${problems.includes(pr.id)?'active':''}" data-prob="${pr.id}">${pr.label}</button>`).join('')}
     </div>
 
     <div id="suggestionsBox"></div>
 
-    <h3 style="margin-top:20px;margin-bottom:8px;font-size:14px">⭐ تقييم أداء اللاعبين</h3>
-    <p style="font-size:11.5px;color:var(--muted);margin:0 0 10px">قيّم كل لاعب من 0-10 حسب أدائه في المباراة، واذكر عدد الدقائق التي لعبها.</p>
+    <h3 style="margin-top:20px;margin-bottom:8px;font-size:14px">⭐ أداء اللاعبين</h3>
     <div id="matchRatings" style="max-height:50vh;overflow-y:auto;padding-inline-end:4px">
       ${players.map(p=>{
         const r=perf[p.id]||{};
@@ -1543,7 +1442,7 @@ function openMatchForm(id){
               <input type="range" min="0" max="10" value="${r.rating||0}" data-mpid="${p.id}" data-mkey="rating" class="mp-input" />
               <div class="rating-val" data-mpid="${p.id}" data-mkey="rating" style="font-size:11px;padding:2px">${r.rating||0}</div>
             </label>
-            <label style="font-size:11px">الدقائق الملعوبة
+            <label style="font-size:11px">الدقائق
               <input type="number" min="0" max="120" value="${r.minutes||''}" data-mpid="${p.id}" data-mkey="minutes" class="mp-input-num" placeholder="90" />
             </label>
           </div>
@@ -1554,7 +1453,7 @@ function openMatchForm(id){
     <div class="modal-actions">
       ${m?`<button class="btn small danger" onclick="deleteMatch('${m.id}')">🗑️ حذف</button>`:''}
       <button class="btn ghost" onclick="closeModal()">إلغاء</button>
-      <button class="btn primary" onclick="saveMatch('${id||''}')">💾 حفظ المباراة</button>
+      <button class="btn primary" onclick="saveMatch('${id||''}')">💾 حفظ</button>
     </div>
   `);
 
@@ -1583,20 +1482,20 @@ function updateSuggestions(){
   const box=$('#suggestionsBox');
   if(!probs.length){box.innerHTML='';return;}
   const suggestions=[];
-  if(probs.includes('gk'))suggestions.push('🧤 اختر حارساً بتقييم أعلى، أو درّبه على التصدي والتمركز. جرّب تدريب "أساسيات حارس المرمى" و"التصدي القوي".');
-  if(probs.includes('def_center'))suggestions.push('🛡️ الدفاع العمقي مكشوف — جرّب تشكيلة 5-3-2 أو 5-4-1 لزيادة عدد المدافعين، ودرّب "الدفاع ككتلة".');
-  if(probs.includes('def_right'))suggestions.push('➡️ الجهة اليمنى ضعيفة — ضع ظهيراً يمينياً أفضل، أو انقل جناحاً يسرى للجهة اليمنى (قدم معكوسة للعرض).');
-  if(probs.includes('def_left'))suggestions.push('⬅️ الجهة اليسرى ضعيفة — ضع ظهيراً أيسر أفضل، أو جرب ظهيراً من الجناح الأيمن.');
-  if(probs.includes('mid_center'))suggestions.push('⚙️ الوسط ضعيف — جرّب 4-5-1 مع ثلاثي محوري، أو 4-2-3-1. ركّز على تمارين Rondo والاستحواذ.');
-  if(probs.includes('mid_right'))suggestions.push('↗️ الوسط الأيمن ضعيف — استخدم جناحاً سريعاً أو انقل لاعب وسط مركزي للجهة.');
-  if(probs.includes('mid_left'))suggestions.push('↖️ الوسط الأيسر ضعيف — استخدم جناحاً أيسر سريعاً أو انقل وسطاً للجهة.');
-  if(probs.includes('att_center'))suggestions.push('🎯 الهجوم ضعيف — جرّب 4-3-3 أو 3-4-3 لزيادة عدد المهاجمين، ركّز على تمارين التسديد والرأسيات.');
-  if(probs.includes('att_right'))suggestions.push('↗️ الهجوم الأيمن ضعيف — ضع جناحاً أيمن سريعاً أو مهاجماً من الجهة.');
-  if(probs.includes('att_left'))suggestions.push('↖️ الهجوم الأيسر ضعيف — ضع جناحاً أيسر سريعاً أو مهاجماً من الجهة.');
-  if(probs.includes('fitness'))suggestions.push('💪 اللياقة منخفضة — ركّز على تمارين "محطات لياقة" و"التحمل بالكرة" و"تدريب السرعة".');
-  if(probs.includes('discipline'))suggestions.push('📋 الانضباط التكتيكي ضعيف — درّب "الدفاع ككتلة" و"الضغط العالي" و"التحرك الجماعي".');
-  if(probs.includes('finishing'))suggestions.push('⚽ إنهاء الفرص ضعيف — درّب "التسديد من خارج المنطقة" و"التسديد بعد المراوغة".');
-  if(probs.includes('buildup'))suggestions.push('🔄 بناء الهجمة ضعيف — درّب "اللعب من الخلف" و"الباص السريع" و"Rondo".');
+  if(probs.includes('gk'))suggestions.push('🧤 اختر حارساً بتقييم أعلى، أو درّبه على التصدي والتمركز.');
+  if(probs.includes('def_center'))suggestions.push('🛡️ جرّب 5-3-2 أو 5-4-1 لزيادة عدد المدافعين.');
+  if(probs.includes('def_right'))suggestions.push('➡️ ضع ظهيراً يمينياً أفضل، أو انقل جناحاً للجهة.');
+  if(probs.includes('def_left'))suggestions.push('⬅️ ضع ظهيراً أيسر أفضل.');
+  if(probs.includes('mid_center'))suggestions.push('⚙️ جرّب 4-5-1 أو 4-2-3-1. ركّز على Rondo.');
+  if(probs.includes('mid_right'))suggestions.push('↗️ استخدم جناحاً سريعاً أو انقل وسطاً للجهة.');
+  if(probs.includes('mid_left'))suggestions.push('↖️ استخدم جناحاً أيسر سريعاً.');
+  if(probs.includes('att_center'))suggestions.push('🎯 جرّب 4-3-3 أو 3-4-3.');
+  if(probs.includes('att_right'))suggestions.push('↗️ ضع جناحاً أيمن سريعاً.');
+  if(probs.includes('att_left'))suggestions.push('↖️ ضع جناحاً أيسر سريعاً.');
+  if(probs.includes('fitness'))suggestions.push('💪 ركّز على تمارين اللياقة.');
+  if(probs.includes('discipline'))suggestions.push('📋 درّب "الدفاع ككتلة".');
+  if(probs.includes('finishing'))suggestions.push('⚽ درّب التسديد.');
+  if(probs.includes('buildup'))suggestions.push('🔄 درّب "اللعب من الخلف".');
 
   const defProbs=probs.filter(p=>p.startsWith('def')).length;
   const midProbs=probs.filter(p=>p.startsWith('mid')).length;
@@ -1607,9 +1506,9 @@ function updateSuggestions(){
   else if(attProbs>=2)bestForm='4-3-3';
 
   box.innerHTML=`<div class="suggestion-box">
-    <h5>💡 اقتراحات الكود لحل المشاكل:</h5>
+    <h5>💡 اقتراحات:</h5>
     <ul>${suggestions.map(s=>`<li>${s}</li>`).join('')}</ul>
-    ${bestForm?`<div style="margin-top:12px;padding-top:12px;border-top:1px dashed rgba(34,197,94,.3);font-size:12.5px"><b>🎯 التشكيلة الأنسب:</b> جرّب <b style="color:var(--green);font-family:var(--mono)">${bestForm}</b></div>`:''}
+    ${bestForm?`<div style="margin-top:12px;padding-top:12px;border-top:1px dashed rgba(34,197,94,.3);font-size:12.5px"><b>🎯 التشكيلة الأنسب:</b> <b style="color:var(--green);font-family:var(--mono)">${bestForm}</b></div>`:''}
   </div>`;
 }
 
@@ -1640,7 +1539,7 @@ function saveMatch(id){
     problems,performances,lineup:lineupIds
   };
   if(id){const i=matches.findIndex(x=>x.id===id);matches[i]=Object.assign({},matches[i],data);toast('✅ تم التحديث');}
-  else{matches.push(Object.assign({id:uid()},data));toast('✅ تم حفظ المباراة');}
+  else{matches.push(Object.assign({id:uid()},data));toast('✅ تم الحفظ');}
   store.set('coach_matches',matches);closeModal();renderMatches();
 }
 function deleteMatch(id){
@@ -1653,13 +1552,6 @@ function viewMatchLineup(id){
   openModal(`
     <h3>📋 تشكيلة المباراة ضد ${esc(m.opponent)}</h3>
     ${renderLineupHTML(m.formation,s.lineup,'التشكيلة')}
-    <h3 style="margin-top:16px;font-size:14px">⭐ أداء اللاعبين</h3>
-    ${Object.keys(m.performances||{}).map(pid=>{
-      const p=players.find(x=>x.id===pid);if(!p)return '';
-      const r=m.performances[pid];
-      return `<div class="top-player"><span><b>${esc(p.name)}</b> ${r.minutes?`<span style="color:var(--muted);font-size:11px">· ${r.minutes}د</span>`:''}</span><span class="pct">${r.rating||0}/10</span></div>`;
-    }).join('')||'<div style="color:var(--muted);font-size:12px;text-align:center;padding:14px">لم يتم تقييم اللاعبين</div>'}
-    ${m.problems&&m.problems.length?`<div style="margin-top:16px"><b style="font-size:13px">⚠️ المشاكل:</b><div class="problem-grid" style="margin-top:8px">${m.problems.map(p=>`<span class="chip" style="background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.4);color:#dc2626;padding:6px 12px">${(PROBLEMS.find(x=>x.id===p)||{}).label||p}</span>`).join('')}</div></div>`:''}
     <div class="modal-actions"><button class="btn primary" onclick="closeModal()">إغلاق</button></div>
   `);
 }
@@ -1669,12 +1561,582 @@ $('#btnNewMatch').addEventListener('click',()=>{
   openMatchForm();
 });
 
+/* ============ TECH SHEET ============ */
+function initTechSheet(){
+  const catSel=$('#ts-category');
+  if(catSel)catSel.innerHTML='<option value="">— اختر الفئة —</option>'+CATEGORIES.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+
+  const catFilter=$('#ts-cat-filter');
+  if(catFilter)catFilter.innerHTML='<option value="all">كل التصنيفات</option>'+DRILL_CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
+
+  const drillFilters=$('#ts-drill-filters');
+  if(drillFilters){
+    drillFilters.innerHTML=`<button class="fchip active" data-cat="all">الكل</button>`+DRILL_CATS.map(c=>`<button class="fchip" data-cat="${c}">${c}</button>`).join('');
+    $$('#ts-drill-filters .fchip').forEach(b=>b.addEventListener('click',()=>{
+      uiFilters.tsCat=b.dataset.cat;
+      $$('#ts-drill-filters .fchip').forEach(x=>x.classList.toggle('active',x===b));
+      renderTsDrills();
+    }));
+  }
+
+  const tsDate=$('#ts-date');
+  if(tsDate&&!tsDate.value)tsDate.value=todayStr();
+}
+
+function renderTsDrills(){
+  const search=($('#ts-search')?.value||'').trim().toLowerCase();
+  const catFilter=$('#ts-cat-filter')?.value||'all';
+  let list=drills.slice();
+  if(uiFilters.tsCat!=='all')list=list.filter(d=>d.cat===uiFilters.tsCat);
+  if(catFilter!=='all')list=list.filter(d=>d.cat===catFilter);
+  if(search)list=list.filter(d=>(d.title+' '+(d.desc||'')).toLowerCase().includes(search));
+
+  const box=$('#ts-drills-list');
+  if(!box)return;
+  if(!list.length){
+    box.innerHTML=`<div class="empty"><span class="big">📋</span>لا توجد برامج مطابقة.</div>`;
+    return;
+  }
+  box.innerHTML=`<div class="drills-grid">`+list.map(d=>{
+    const isSelected=tsSelected.some(x=>x.id===d.id);
+    return `
+      <div class="dcard">
+        <div class="dmeta">
+          <span class="chip badge">${esc(d.cat)}</span>
+          <span class="chip">⏱ ${d.min} د</span>
+        </div>
+        <h4>${esc(d.title)}</h4>
+        <p>${esc(d.desc||'')}</p>
+        <div class="dcard-actions">
+          <button class="btn small ${isSelected?'primary':''}" onclick="toggleTsDrill('${d.id}')">
+            ${isSelected?'✓ مضافة':'➕ أضف'}
+          </button>
+        </div>
+      </div>`;
+  }).join('')+`</div>`;
+}
+
+function toggleTsDrill(id){
+  const idx=tsSelected.findIndex(x=>x.id===id);
+  if(idx!==-1){
+    tsSelected.splice(idx,1);
+    toast('🗑️ تم الحذف');
+  }else{
+    const d=drills.find(x=>x.id===id);
+    tsSelected.push({id,minutes:d?d.min:10});
+    toast('➕ أضيف');
+  }
+  store.set('coach_ts_selected',tsSelected);
+  renderTsDrills();
+  renderTsSelected();
+}
+
+function renderTsSelected(){
+  const box=$('#ts-selected-list');
+  const countEl=$('#ts-selected-count');
+  const timeEl=$('#ts-total-time');
+  if(!box)return;
+
+  const total=tsSelected.reduce((s,x)=>s+(parseInt(x.minutes)||0),0);
+  if(countEl)countEl.textContent=tsSelected.length?`(${tsSelected.length} حصة)`:'';
+  if(timeEl){
+    timeEl.textContent=`⏱ ${total} دقيقة`;
+    const target=parseInt($('#ts-total')?.value)||90;
+    if(total>target)timeEl.style.color='#ef4444';
+    else if(total===target)timeEl.style.color='#22c55e';
+    else timeEl.style.color='var(--sky)';
+  }
+
+  if(!tsSelected.length){
+    box.innerHTML=`<div class="empty"><span class="big">🧺</span>لم تختر أي حصة بعد.</div>`;
+    return;
+  }
+
+  box.innerHTML=tsSelected.map((item,i)=>{
+    const d=drills.find(x=>x.id===item.id);
+    if(!d)return '';
+    return `
+      <div class="session-card" style="padding:11px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <span style="font-family:var(--mono);font-weight:900;color:var(--sky);font-size:16px;min-width:28px">${i+1}</span>
+          <div style="flex:1;min-width:180px">
+            <div style="font-weight:800;font-size:14px">${esc(d.title)}</div>
+            <div style="font-size:11.5px;color:var(--muted);margin-top:2px">${esc(d.cat)}</div>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <input type="number" min="1" max="120" value="${item.minutes}" 
+              style="width:70px;padding:5px 8px;text-align:center;font-family:var(--mono);font-weight:800"
+              onchange="updateTsMinutes('${item.id}',this.value)" />
+            <span style="font-size:12px;color:var(--muted)">د</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <button class="iconbtn" onclick="moveTsDrill(${i},-1)" ${i===0?'disabled':''}>▲</button>
+            <button class="iconbtn" onclick="moveTsDrill(${i},1)" ${i===tsSelected.length-1?'disabled':''}>▼</button>
+          </div>
+          <button class="iconbtn del" onclick="toggleTsDrill('${item.id}')">✕</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function updateTsMinutes(id,val){
+  const item=tsSelected.find(x=>x.id===id);
+  if(item){
+    item.minutes=parseInt(val)||1;
+    store.set('coach_ts_selected',tsSelected);
+    renderTsSelected();
+  }
+}
+function moveTsDrill(i,dir){
+  const j=i+dir;
+  if(j<0||j>=tsSelected.length)return;
+  [tsSelected[i],tsSelected[j]]=[tsSelected[j],tsSelected[i]];
+  store.set('coach_ts_selected',tsSelected);
+  renderTsSelected();
+}
+
+/* ============ PDF EXPORT (SAVE AS PDF) ============ */
+/* يستخدم window.print() مع CSS مخصص للطباعة. على الهاتف، سيفتح "حفظ ك PDF" */
+function exportPDF(htmlContent, filename){
+  const win=window.open('','_blank','width=900,height=1200');
+  if(!win){
+    toast('⚠️ فعّل النوافذ المنبثقة');
+    return;
+  }
+  win.document.write(`
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+      <meta charset="UTF-8">
+      <title>${esc(filename)}</title>
+      <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+      <style>
+        *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+        body{margin:0;padding:0;font-family:'Cairo',sans-serif;background:#fff;color:#000}
+        @page{size:A4;margin:12mm 10mm}
+        @media print{body{padding:0}}
+        .no-print{
+          position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:999;
+          display:flex;gap:10px;background:rgba(0,0,0,.85);padding:10px;border-radius:14px;
+        }
+        .no-print button{
+          padding:12px 22px;border-radius:10px;border:none;cursor:pointer;
+          font-family:'Cairo',sans-serif;font-weight:800;font-size:14px;
+          background:linear-gradient(135deg,#22c55e,#0ea5e9);color:#04220f;
+        }
+        .no-print button.close{background:#333;color:#fff}
+        .print-page{direction:rtl;color:#000;background:#fff;padding:0}
+        .print-page h1{
+          font-size:22pt;font-weight:900;text-align:center;
+          border-bottom:3px double #000;padding-bottom:6px;margin:0 0 6mm;
+        }
+        .print-page h2{
+          font-size:13pt;font-weight:800;background:#f0f0f0;
+          padding:5px 12px;margin:7mm 0 3mm;border-right:4px solid #22c55e;
+        }
+        .print-page .print-meta{display:grid;grid-template-columns:1fr 1fr;gap:3mm 8mm;margin-bottom:5mm;font-size:11pt}
+        .print-page .print-meta div{border-bottom:1px dotted #999;padding:3px 0;display:flex;justify-content:space-between}
+        .print-page .print-meta b{font-weight:800}
+        .print-page table{width:100%;border-collapse:collapse;margin-bottom:5mm;font-size:10.5pt}
+        .print-page table th{background:#e5e5e5;font-weight:800;padding:6px 8px;border:1px solid #666;text-align:center}
+        .print-page table td{padding:6px 8px;border:1px solid #666;text-align:center}
+        .print-page table td:first-child{text-align:right;font-weight:700}
+        .print-page .print-signature{margin-top:10mm;display:flex;justify-content:space-between;font-size:11pt}
+        .print-page .print-signature div{border-top:2px solid #000;padding-top:3px;min-width:60mm;text-align:center;font-weight:700}
+        .print-page .print-total{text-align:center;font-size:13pt;font-weight:900;background:#f0f0f0;padding:4mm;margin:4mm 0;border:2px solid #000}
+        .print-page .print-footer{text-align:center;font-size:9pt;color:#666;margin-top:10mm;border-top:1px solid #ccc;padding-top:3mm}
+      </style>
+    </head>
+    <body>
+      <div class="no-print">
+        <button onclick="window.print()">📄 حفظ PDF / طباعة</button>
+        <button class="close" onclick="window.close()">إغلاق</button>
+      </div>
+      ${htmlContent}
+    </body>
+    </html>
+  `);
+  win.document.close();
+}
+
+/* ============ PDF: ورقة الجلسة ============ */
+function exportSessionPDF(blank){
+  const date=$('#ts-date')?.value||todayStr();
+  const title=$('#ts-title')?.value||'جلسة تدريبية';
+  const catId=$('#ts-category')?.value||'';
+  const catName=catId?catOf(catId).name:'—';
+  const field=$('#ts-field')?.value||'—';
+  const total=parseInt($('#ts-total')?.value)||90;
+  const playersCount=$('#ts-players')?.value||'—';
+  const goal=$('#ts-goal')?.value||'—';
+
+  let rowsHtml='';
+  if(blank){
+    for(let i=1;i<=10;i++){
+      rowsHtml+=`<tr><td>${i}</td><td style="height:12mm"></td><td></td><td></td><td></td></tr>`;
+    }
+  }else{
+    let accum=0;
+    tsSelected.forEach((item,i)=>{
+      const d=drills.find(x=>x.id===item.id);
+      if(!d)return;
+      accum+=item.minutes;
+      const steps=(d.steps||[]).join(' • ');
+      rowsHtml+=`<tr>
+        <td>${i+1}</td>
+        <td><b>${esc(d.title)}</b></td>
+        <td>${esc(d.cat)}</td>
+        <td>${item.minutes} د</td>
+        <td>${accum} د</td>
+      </tr>`;
+      if(steps)rowsHtml+=`<tr><td></td><td colspan="4" style="text-align:right;font-size:9.5pt;color:#555;font-style:italic">${esc(steps)}</td></tr>`;
+    });
+  }
+
+  const totalPlanned=blank?'':tsSelected.reduce((s,x)=>s+(parseInt(x.minutes)||0),0);
+
+  const html=`
+    <div class="print-page">
+      <h1>📄 ورقة الجلسة التدريبية</h1>
+      <div class="print-meta">
+        <div><b>التاريخ:</b> <span>${fmtDate(date)}</span></div>
+        <div><b>الملعب:</b> <span>${esc(field)}</span></div>
+        <div><b>الفئة:</b> <span>${esc(catName)}</span></div>
+        <div><b>عدد اللاعبين:</b> <span>${esc(playersCount)}</span></div>
+        <div><b>الوقت الكلي:</b> <span>${total} دقيقة</span></div>
+        <div><b>الوقت المخطط:</b> <span>${totalPlanned?totalPlanned+' دقيقة':'—'}</span></div>
+      </div>
+      <h2>🎯 الموضوع والهدف</h2>
+      <p style="font-size:11pt;line-height:1.7;padding:3mm;border:1px solid #999;background:#fafafa">
+        <b>${esc(title)}</b><br>${esc(goal)}
+      </p>
+      <h2>📋 محتوى الجلسة</h2>
+      <table>
+        <thead><tr>
+          <th style="width:8%">#</th>
+          <th style="width:42%">اسم التمرين</th>
+          <th style="width:15%">التصنيف</th>
+          <th style="width:15%">المدة</th>
+          <th style="width:20%">التراكمي</th>
+        </tr></thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+      ${!blank&&totalPlanned?`<div class="print-total">⏱ المدة الإجمالية: ${totalPlanned} دقيقة</div>`:''}
+      <h2>📝 ملاحظات المدرب</h2>
+      <div style="border:1px solid #999;padding:4mm;min-height:25mm;background:#fafafa"></div>
+      <div class="print-signature">
+        <div>توقيع المدرب</div>
+        <div>توقيع المسؤول</div>
+      </div>
+      <div class="print-footer">مدرّبي Pro — ${fmtDate(date)}</div>
+    </div>
+  `;
+  exportPDF(html,'ورقة-الجلسة-'+date);
+}
+
+/* ============ PDF: حضور اللاعبين ============ */
+function exportAttendancePDF(){
+  const date=todayStr();
+  const dayData=attendance[date]||{};
+  const dayReasons=absenceReasons[date]||{};
+
+  let rows='';
+  let presentCount=0,absentCount=0,lateCount=0;
+
+  players.forEach((p,i)=>{
+    const st=dayData[p.id]||'';
+    if(st==='yes')presentCount++;
+    else if(st==='no')absentCount++;
+    else if(st==='late')lateCount++;
+    const statusText=st==='yes'?'✓ حاضر':st==='no'?'✕ غائب':st==='late'?'⏰ متأخر':'—';
+    const reason=dayReasons[p.id]||'';
+    rows+=`<tr>
+      <td>${i+1}</td>
+      <td>${esc(p.name)}</td>
+      <td>${p.num||'—'}</td>
+      <td>${esc(catOf(p.cat).name)}</td>
+      <td>${statusText}</td>
+      <td style="min-width:35mm">${esc(reason)}</td>
+    </tr>`;
+  });
+
+  const html=`
+    <div class="print-page">
+      <h1>👥 تقرير حضور اللاعبين</h1>
+      <div class="print-meta">
+        <div><b>التاريخ:</b> <span>${fmtDate(date)}</span></div>
+        <div><b>الإجمالي:</b> <span>${players.length}</span></div>
+        <div><b>الحاضرون:</b> <span>${presentCount}</span></div>
+        <div><b>المتأخرون:</b> <span>${lateCount}</span></div>
+        <div><b>الغائبون:</b> <span>${absentCount}</span></div>
+        <div><b>نسبة الحضور:</b> <span>${players.length?Math.round(presentCount/players.length*100):0}%</span></div>
+      </div>
+      <table>
+        <thead><tr>
+          <th style="width:6%">#</th>
+          <th style="width:28%">الاسم</th>
+          <th style="width:8%">الرقم</th>
+          <th style="width:16%">الفئة</th>
+          <th style="width:12%">الحالة</th>
+          <th style="width:30%">سبب الغياب</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="print-signature">
+        <div>توقيع المدرب</div>
+        <div>توقيع المسؤول</div>
+      </div>
+      <div class="print-footer">مدرّبي Pro — ${fmtDate(date)}</div>
+    </div>
+  `;
+  exportPDF(html,'حضور-'+date);
+}
+
+/* ============ PDF: تقرير المباراة ============ */
+function exportMatchPDF(matchId){
+  const m=matches.find(x=>x.id===matchId);
+  if(!m){toast('⚠️ اختر مباراة');return;}
+
+  const lineup=m.lineup||[];
+  const perf=m.performances||{};
+  const problems=m.problems||[];
+  const mAbsences=matchAbsenceReasons[m.id]||{};
+
+  const starters=lineup.map(pid=>players.find(p=>p.id===pid)).filter(Boolean);
+  const allRated=Object.keys(perf).map(pid=>players.find(p=>p.id===pid)).filter(Boolean);
+  const subs=allRated.filter(p=>!lineup.includes(p.id));
+  const exempted=Object.keys(mAbsences).filter(pid=>mAbsences[pid]==='exempt').map(pid=>players.find(p=>p.id===pid)).filter(Boolean);
+  const absent=Object.keys(mAbsences).filter(pid=>mAbsences[pid]==='absent').map(pid=>players.find(p=>p.id===pid)).filter(Boolean);
+  const otherAbsent=players.filter(p=>!perf[p.id]&&!mAbsences[p.id]);
+
+  const score=(m.ourScore!=null&&m.theirScore!=null)?`${m.ourScore} - ${m.theirScore}`:'—';
+  const result=(m.ourScore!=null&&m.theirScore!=null)
+    ?(m.ourScore>m.theirScore?'فوز':m.ourScore<m.theirScore?'خسارة':'تعادل'):'—';
+
+  const makeTable=(list,showStats)=>{
+    if(!list.length)return '<tr><td colspan="6" style="color:#888;padding:4mm">—</td></tr>';
+    return list.map((p,i)=>{
+      const r=perf[p.id]||{};
+      return `<tr>
+        <td>${i+1}</td>
+        <td>${esc(p.name)}</td>
+        <td>${p.num||'—'}</td>
+        <td>${playerPositions(p).map(id=>posOf(id).name).join(' / ')||'—'}</td>
+        ${showStats?`<td>${r.minutes||0} د</td><td>${r.rating!=null?r.rating+'/10':'—'}</td>`:'<td></td><td></td>'}
+      </tr>`;
+    }).join('');
+  };
+
+  const makeAbsentTable=(list,type)=>{
+    if(!list.length)return '<tr><td colspan="5" style="color:#888;padding:4mm">—</td></tr>';
+    return list.map((p,i)=>{
+      const reason=mAbsences[p.id]==='exempt'?'معفى':mAbsences[p.id]==='absent'?'غائب':'—';
+      return `<tr>
+        <td>${i+1}</td>
+        <td>${esc(p.name)}</td>
+        <td>${p.num||'—'}</td>
+        <td>${playerPositions(p).map(id=>posOf(id).name).join(' / ')||'—'}</td>
+        <td>${reason}</td>
+      </tr>`;
+    }).join('');
+  };
+
+  const html=`
+    <div class="print-page">
+      <h1>⚽ تقرير المباراة</h1>
+      <div class="print-meta">
+        <div><b>التاريخ:</b> <span>${fmtDate(m.date)}</span></div>
+        <div><b>الخصم:</b> <span>${esc(m.opponent||'—')}</span></div>
+        <div><b>النتيجة:</b> <span style="font-family:monospace;font-size:14pt;font-weight:900">${score}</span></div>
+        <div><b>النتيجة النهائية:</b> <span><b>${result}</b></span></div>
+        <div><b>التشكيلة:</b> <span>${esc(m.formation||'—')}</span></div>
+        <div><b>عدد المُقيَّمين:</b> <span>${allRated.length}</span></div>
+      </div>
+
+      <h2>🎯 التشكيلة الأساسية (${starters.length})</h2>
+      <table>
+        <thead><tr>
+          <th style="width:6%">#</th>
+          <th style="width:30%">الاسم</th>
+          <th style="width:8%">الرقم</th>
+          <th style="width:20%">المركز</th>
+          <th style="width:18%">الدقائق</th>
+          <th style="width:18%">التقييم</th>
+        </tr></thead>
+        <tbody>${makeTable(starters,true)}</tbody>
+      </table>
+
+      <h2>🔄 البدلاء (${subs.length})</h2>
+      <table>
+        <thead><tr>
+          <th style="width:6%">#</th>
+          <th style="width:30%">الاسم</th>
+          <th style="width:8%">الرقم</th>
+          <th style="width:20%">المركز</th>
+          <th style="width:18%">الدقائق</th>
+          <th style="width:18%">التقييم</th>
+        </tr></thead>
+        <tbody>${makeTable(subs,true)}</tbody>
+      </table>
+
+      <h2>🚫 المعفيون (${exempted.length})</h2>
+      <table>
+        <thead><tr>
+          <th style="width:6%">#</th>
+          <th style="width:30%">الاسم</th>
+          <th style="width:8%">الرقم</th>
+          <th style="width:20%">المركز</th>
+          <th style="width:36%">الحالة</th>
+        </tr></thead>
+        <tbody>${makeAbsentTable(exempted,'exempt')}</tbody>
+      </table>
+
+      <h2>❌ الغائبون (${absent.length+otherAbsent.length})</h2>
+      <table>
+        <thead><tr>
+          <th style="width:6%">#</th>
+          <th style="width:30%">الاسم</th>
+          <th style="width:8%">الرقم</th>
+          <th style="width:20%">المركز</th>
+          <th style="width:36%">الحالة</th>
+        </tr></thead>
+        <tbody>
+          ${makeAbsentTable(absent,'absent')}
+          ${otherAbsent.length?otherAbsent.map((p,i)=>`
+            <tr>
+              <td>${absent.length+i+1}</td>
+              <td>${esc(p.name)}</td>
+              <td>${p.num||'—'}</td>
+              <td>${playerPositions(p).map(id=>posOf(id).name).join(' / ')||'—'}</td>
+              <td>غائب</td>
+            </tr>
+          `).join(''):''}
+        </tbody>
+      </table>
+
+      ${problems.length?`
+        <h2>⚠️ المشاكل الملاحظة</h2>
+        <ul style="font-size:11pt;line-height:1.9;padding-inline-start:8mm">
+          ${problems.map(pid=>{
+            const pr=PROBLEMS.find(x=>x.id===pid);
+            return pr?`<li>${pr.label}</li>`:'';
+          }).join('')}
+        </ul>
+      `:''}
+
+      <h2>📝 ملاحظات المدرب</h2>
+      <div style="border:1px solid #999;padding:4mm;min-height:25mm;background:#fafafa"></div>
+
+      <div class="print-signature">
+        <div>توقيع المدرب</div>
+        <div>توقيع المسؤول</div>
+      </div>
+      <div class="print-footer">مدرّبي Pro — ضد ${esc(m.opponent)} — ${fmtDate(m.date)}</div>
+    </div>
+  `;
+  exportPDF(html,'تقرير-المباراة-'+m.date);
+}
+
+/* ============ REPORTS VIEW ============ */
+function renderReports(){
+  const sel=$('#report-match-sel');
+  if(!sel)return;
+  const prev=sel.value;
+  sel.innerHTML='<option value="">— اختر مباراة —</option>'+
+    matches.slice().sort((a,b)=>(b.date||'').localeCompare(a.date||'')).map(m=>
+      `<option value="${m.id}">${fmtDate(m.date)} — ضد ${esc(m.opponent||'—')}</option>`
+    ).join('');
+  if(prev)sel.value=prev;
+
+  const box=$('#reportContent');
+  const mid=sel.value;
+  if(!mid){
+    box.innerHTML=`<div class="empty"><span class="big">📊</span>اختر مباراة لعرض التقرير.</div>`;
+    return;
+  }
+  const m=matches.find(x=>x.id===mid);
+  if(!m)return;
+
+  const lineup=m.lineup||[];
+  const perf=m.performances||{};
+  const mAbsences=matchAbsenceReasons[m.id]||{};
+  const starters=lineup.map(pid=>players.find(p=>p.id===pid)).filter(Boolean);
+  const allRated=Object.keys(perf).map(pid=>players.find(p=>p.id===pid)).filter(Boolean);
+  const subs=allRated.filter(p=>!lineup.includes(p.id));
+  const exempted=Object.keys(mAbsences).filter(pid=>mAbsences[pid]==='exempt').map(pid=>players.find(p=>p.id===pid)).filter(Boolean);
+  const absent=Object.keys(mAbsences).filter(pid=>mAbsences[pid]==='absent').map(pid=>players.find(p=>p.id===pid)).filter(Boolean);
+  const otherAbsent=players.filter(p=>!perf[p.id]&&!mAbsences[p.id]);
+
+  const score=(m.ourScore!=null&&m.theirScore!=null)?`${m.ourScore} - ${m.theirScore}`:'—';
+
+  box.innerHTML=`
+    <div class="analysis-card">
+      <h5>⚽ ملخص</h5>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px">
+        <div style="text-align:center;padding:12px;background:var(--glass);border-radius:12px">
+          <div style="font-family:var(--mono);font-size:22px;font-weight:900;color:var(--sky)">${score}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px">النتيجة</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:var(--glass);border-radius:12px">
+          <div style="font-family:var(--mono);font-size:22px;font-weight:900;color:var(--green)">${starters.length}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px">الأساسيون</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:var(--glass);border-radius:12px">
+          <div style="font-family:var(--mono);font-size:22px;font-weight:900;color:var(--amber)">${subs.length}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px">الاحتياطيون</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:var(--glass);border-radius:12px">
+          <div style="font-family:var(--mono);font-size:22px;font-weight:900;color:var(--purple)">${exempted.length}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px">معفيون</div>
+        </div>
+        <div style="text-align:center;padding:12px;background:var(--glass);border-radius:12px">
+          <div style="font-family:var(--mono);font-size:22px;font-weight:900;color:var(--red)">${absent.length+otherAbsent.length}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px">غائبون</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="analysis-card">
+      <h5>🎯 الأساسيون (${starters.length})</h5>
+      ${starters.map(p=>{
+        const r=perf[p.id]||{};
+        return `<div class="top-player">
+          <span><b>${esc(p.name)}</b> ${p.num?`#${p.num}`:''}</span>
+          <span class="pct">${r.minutes||0}د · ${r.rating||0}/10</span>
+        </div>`;
+      }).join('')||'<div style="color:var(--muted);text-align:center;padding:8px">—</div>'}
+    </div>
+
+    <div class="analysis-card">
+      <h5>🔄 الاحتياطيون (${subs.length})</h5>
+      ${subs.map(p=>{
+        const r=perf[p.id]||{};
+        return `<div class="top-player">
+          <span><b>${esc(p.name)}</b> ${p.num?`#${p.num}`:''}</span>
+          <span class="pct">${r.minutes||0}د · ${r.rating||0}/10</span>
+        </div>`;
+      }).join('')||'<div style="color:var(--muted);text-align:center;padding:8px">—</div>'}
+    </div>
+
+    <div class="analysis-card">
+      <h5>🚫 المعفيون (${exempted.length})</h5>
+      ${exempted.map(p=>`<div class="top-player"><span><b>${esc(p.name)}</b></span><span style="color:var(--purple);font-size:11px">معفى</span></div>`).join('')||'<div style="color:var(--muted);text-align:center;padding:8px">—</div>'}
+    </div>
+
+    <div class="analysis-card">
+      <h5>❌ الغائبون (${absent.length+otherAbsent.length})</h5>
+      ${[...absent,...otherAbsent].map(p=>`<div class="top-player"><span><b>${esc(p.name)}</b></span><span style="color:var(--red);font-size:11px">غائب</span></div>`).join('')||'<div style="color:var(--muted);text-align:center;padding:8px">—</div>'}
+    </div>
+  `;
+}
+
 /* ============ ATTENDANCE ============ */
 function renderAttendance(){
   const dateEl=$('#attDate');
   if(!dateEl.value)dateEl.value=todayStr();
   const date=dateEl.value;
   const dayData=attendance[date]||{};
+  const dayReasons=absenceReasons[date]||{};
   const box=$('#attContent');
   if(!players.length){box.innerHTML=`<div class="empty"><span class="big">👥</span>أضف لاعبين أولاً.</div>`;return;}
   const groups={};
@@ -1685,12 +2147,16 @@ function renderAttendance(){
     html+=`<table class="att-table"><thead><tr><th style="text-align:right;padding-inline-start:14px">اللاعب</th><th>حاضر</th><th>متأخر</th><th>غائب</th></tr></thead><tbody>`;
     groups[cat].forEach(p=>{
       const st=dayData[p.id]||'';
+      const reason=dayReasons[p.id]||'';
       html+=`<tr>
         <td>${esc(p.name)} ${p.num?`<span style="color:var(--muted);font-size:11px">#${p.num}</span>`:''}</td>
         <td><button class="att-tick ${st==='yes'?'yes':''}" data-pid="${p.id}" data-st="yes" onclick="toggleAtt(this)">✓</button></td>
         <td><button class="att-tick ${st==='late'?'late':''}" data-pid="${p.id}" data-st="late" onclick="toggleAtt(this)">⏰</button></td>
         <td><button class="att-tick ${st==='no'?'no':''}" data-pid="${p.id}" data-st="no" onclick="toggleAtt(this)">✕</button></td>
-      </tr>`;
+      </tr>
+      <tr><td colspan="4" style="padding:4px 14px 8px">
+        <input class="att-reason" placeholder="سبب الغياب (اختياري)..." value="${esc(reason)}" onchange="saveAbsenceReason('${p.id}',this.value)" />
+      </td></tr>`;
     });
     html+='</tbody></table>';
   });
@@ -1707,6 +2173,13 @@ function toggleAtt(btn){
   else{attendance[date][pid]=st;btn.classList.add(cls);}
   store.set('coach_attendance',attendance);
 }
+function saveAbsenceReason(pid,val){
+  const date=$('#attDate').value;
+  if(!absenceReasons[date])absenceReasons[date]={};
+  if(val.trim())absenceReasons[date][pid]=val.trim();
+  else delete absenceReasons[date][pid];
+  store.set('coach_absence_reasons',absenceReasons);
+}
 $('#attDate').addEventListener('change',renderAttendance);
 $('#btnAttToday').addEventListener('click',()=>{$('#attDate').value=todayStr();renderAttendance();});
 $('#btnAttAll').addEventListener('click',()=>{
@@ -1715,13 +2188,13 @@ $('#btnAttAll').addEventListener('click',()=>{
   players.forEach(p=>{attendance[date][p.id]='yes';});
   store.set('coach_attendance',attendance);renderAttendance();toast('✅ الجميع حاضرون');
 });
-$('#btnAttSave').addEventListener('click',()=>{store.set('coach_attendance',attendance);toast('💾 تم الحفظ');});
+$('#btnAttSave').addEventListener('click',()=>{store.set('coach_attendance',attendance);store.set('coach_absence_reasons',absenceReasons);toast('💾 تم الحفظ');});
 
 /* ============ ANALYSIS ============ */
 function renderAnalysis(){
   const box=$('#analysisContent');
   const rated=players.filter(p=>combinedRating(p)>0);
-  if(!players.length){box.innerHTML=`<div class="empty"><span class="big">📊</span>أضف لاعبين لعرض التحليل.</div>`;return;}
+  if(!players.length){box.innerHTML=`<div class="empty"><span class="big">📉</span>أضف لاعبين.</div>`;return;}
   const teamAvg=rated.length?rated.reduce((s,p)=>s+combinedRating(p),0)/rated.length*10:0;
   const dims={};
   RATING_DIMS.forEach(d=>{
@@ -1733,7 +2206,7 @@ function renderAnalysis(){
   RATING_DIMS.forEach(d=>{leaders[d.key]=rated.slice().sort((a,b)=>(dimAvg(b)[d.key]||0)-(dimAvg(a)[d.key]||0)).slice(0,3);});
   box.innerHTML=`
     <div class="analysis-card">
-      <h5>🎯 متوسط الفريق (تدريب + مباريات)</h5>
+      <h5>🎯 متوسط الفريق</h5>
       <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
         <div style="font-size:38px;font-weight:900;font-family:var(--mono);background:linear-gradient(140deg,#22c55e,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent">${Math.round(teamAvg)}%</div>
         <div style="flex:1;min-width:180px">
@@ -1743,7 +2216,7 @@ function renderAnalysis(){
       </div>
     </div>
     <div class="analysis-card">
-      <h5>📈 متوسط كل مهارة (من التدريبات)</h5>
+      <h5>📈 متوسط كل مهارة</h5>
       ${RATING_DIMS.map(d=>{const v=dims[d.key];return `<div class="stat-bar"><span class="lbl">${d.label}</span><div class="track"><div class="fill" style="width:${v*10}%;background:${pctColor(v*10)}"></div></div><span class="val">${v.toFixed(1)}</span></div>`;}).join('')}
     </div>
     <div class="analysis-card">
@@ -1755,7 +2228,7 @@ function renderAnalysis(){
       <div class="pos-dist">${POSITIONS.filter(pos=>posDist[pos.id]).map(pos=>`<span class="chip" style="background:${pos.color}22;border-color:${pos.color}55;color:${pos.color}">${pos.name}: ${posDist[pos.id]}</span>`).join('')}</div>
     </div>
     <div class="analysis-card">
-      <h5>📊 ترتيب اللاعبين الكامل</h5>
+      <h5>📊 ترتيب اللاعبين</h5>
       ${rated.length?rated.slice().sort((a,b)=>combinedRating(b)-combinedRating(a)).map((p,i)=>{
         const t=trainingAvg(p),m=matchAvg(p);
         return `<div class="top-player">
@@ -1784,12 +2257,10 @@ function renderCompare(){
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
       <div style="background:var(--glass);border:1px solid var(--brd);border-radius:16px;padding:14px;text-align:center">
         <h4 style="margin:0 0 4px;font-size:15px">${esc(p1.name)}</h4>
-        <div style="color:var(--muted);font-size:11.5px">${playerPositions(p1).map(i=>posOf(i).name).join(' / ')}</div>
         <div style="font-size:24px;font-weight:900;color:var(--sky);margin-top:4px;font-family:var(--mono)">${avgPct(p1)}%</div>
       </div>
       <div style="background:var(--glass);border:1px solid var(--brd);border-radius:16px;padding:14px;text-align:center">
         <h4 style="margin:0 0 4px;font-size:15px">${esc(p2.name)}</h4>
-        <div style="color:var(--muted);font-size:11.5px">${playerPositions(p2).map(i=>posOf(i).name).join(' / ')}</div>
         <div style="font-size:24px;font-weight:900;color:var(--sky);margin-top:4px;font-family:var(--mono)">${avgPct(p2)}%</div>
       </div>
     </div>
@@ -1863,7 +2334,7 @@ function openDrillForm(id){
       <label>المدة (د)<input id="d-min" type="number" min="1" value="${esc(d.min||10)}" /></label>
       <label>عدد اللاعبين<input id="d-players" type="number" min="1" value="${esc(d.players||12)}" /></label>
       <label class="full">الوصف<textarea id="d-desc" rows="2">${esc(d.desc||'')}</textarea></label>
-      <label class="full">الخطوات (سطر لكل خطوة)<textarea id="d-steps" rows="5">${esc((d.steps||[]).join('\n'))}</textarea></label>
+      <label class="full">الخطوات<textarea id="d-steps" rows="5">${esc((d.steps||[]).join('\n'))}</textarea></label>
     </div>
     <div class="modal-actions">
       ${!isNew?`<button class="btn danger" onclick="deleteDrill('${id}')">🗑️</button>`:''}
@@ -1888,10 +2359,10 @@ let W=0,H=0;
 const board={orientation:'landscape',tool:'select',color:'#facc15',penWidth:4,strokes:[],tokens:[],drag:null};
 const PALETTE=['#facc15','#ffffff','#38bdf8','#ef4444','#22c55e','#f97316','#a855f7','#0f172a'];
 const FORMATIONS={
-  5:{'1-2-1':{lines:[{n:1,u:0.22},{n:2,u:0.34},{n:1,u:0.46}]},'2-1-1':{lines:[{n:2,u:0.22},{n:1,u:0.34},{n:1,u:0.46}]},'1-1-2':{lines:[{n:1,u:0.22},{n:1,u:0.34},{n:2,u:0.46}]},'2-2':{lines:[{n:2,u:0.24},{n:2,u:0.42}]}},
-  7:{'2-3-1':{lines:[{n:2,u:0.20},{n:3,u:0.34},{n:1,u:0.46}]},'3-2-1':{lines:[{n:3,u:0.20},{n:2,u:0.34},{n:1,u:0.46}]},'2-2-2':{lines:[{n:2,u:0.20},{n:2,u:0.34},{n:2,u:0.46}]},'3-1-2':{lines:[{n:3,u:0.20},{n:1,u:0.34},{n:2,u:0.46}]}},
-  9:{'3-3-2':{lines:[{n:3,u:0.19},{n:3,u:0.33},{n:2,u:0.45}]},'3-2-3':{lines:[{n:3,u:0.19},{n:2,u:0.33},{n:3,u:0.45}]},'4-3-1':{lines:[{n:4,u:0.19},{n:3,u:0.33},{n:1,u:0.45}]},'4-2-2':{lines:[{n:4,u:0.19},{n:2,u:0.33},{n:2,u:0.45}]}},
-  11:{'4-4-2':{lines:[{n:4,u:0.18},{n:4,u:0.34},{n:2,u:0.46}]},'4-3-3':{lines:[{n:4,u:0.18},{n:3,u:0.33},{n:3,u:0.46}]},'3-5-2':{lines:[{n:3,u:0.18},{n:5,u:0.33},{n:2,u:0.46}]},'4-2-3-1':{lines:[{n:4,u:0.17},{n:2,u:0.29},{n:3,u:0.39},{n:1,u:0.48}]},'5-3-2':{lines:[{n:5,u:0.17},{n:3,u:0.33},{n:2,u:0.46}]},'3-4-3':{lines:[{n:3,u:0.18},{n:4,u:0.33},{n:3,u:0.46}]}}
+  5:{'1-2-1':{lines:[{n:1,u:0.22},{n:2,u:0.34},{n:1,u:0.46}]},'2-1-1':{lines:[{n:2,u:0.22},{n:1,u:0.34},{n:1,u:0.46}]},'2-2':{lines:[{n:2,u:0.24},{n:2,u:0.42}]}},
+  7:{'2-3-1':{lines:[{n:2,u:0.20},{n:3,u:0.34},{n:1,u:0.46}]},'3-2-1':{lines:[{n:3,u:0.20},{n:2,u:0.34},{n:1,u:0.46}]},'2-2-2':{lines:[{n:2,u:0.20},{n:2,u:0.34},{n:2,u:0.46}]}},
+  9:{'3-3-2':{lines:[{n:3,u:0.19},{n:3,u:0.33},{n:2,u:0.45}]},'3-2-3':{lines:[{n:3,u:0.19},{n:2,u:0.33},{n:3,u:0.45}]},'4-3-1':{lines:[{n:4,u:0.19},{n:3,u:0.33},{n:1,u:0.45}]}},
+  11:{'4-4-2':{lines:[{n:4,u:0.18},{n:4,u:0.34},{n:2,u:0.46}]},'4-3-3':{lines:[{n:4,u:0.18},{n:3,u:0.33},{n:3,u:0.46}]},'3-5-2':{lines:[{n:3,u:0.18},{n:5,u:0.33},{n:2,u:0.46}]},'4-2-3-1':{lines:[{n:4,u:0.17},{n:2,u:0.29},{n:3,u:0.39},{n:1,u:0.48}]},'5-3-2':{lines:[{n:5,u:0.17},{n:3,u:0.33},{n:2,u:0.46}]}}
 };
 function applyFormation(count,name,teams){
   const conf=FORMATIONS[count]&&FORMATIONS[count][name];if(!conf)return false;
@@ -1927,21 +2398,14 @@ function drawField(){
   const g=geom();
   const grad=ctx.createLinearGradient(0,0,0,H);grad.addColorStop(0,'#177a3f');grad.addColorStop(1,'#0e5330');
   ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
-  const n=10;ctx.fillStyle='rgba(255,255,255,.035)';
-  for(let i=0;i<n;i+=2){if(g.landscape)ctx.fillRect(g.x0+(i/n)*g.fw,g.y0,g.fw/n,g.fh);else ctx.fillRect(g.x0,g.y0+(i/n)*g.fh,g.fw,g.fh/n);}
-  ctx.strokeStyle='rgba(255,255,255,.78)';ctx.lineWidth=Math.max(1.2,g.L*0.0035);ctx.lineCap='round';
+  ctx.strokeStyle='rgba(255,255,255,.78)';ctx.lineWidth=Math.max(1.2,g.L*0.0035);
   ctx.strokeRect(g.x0,g.y0,g.fw,g.fh);
-  const P=(u,v)=>f2c(u,v);
-  const lineUV=(u1,v1,u2,v2)=>{const a=P(u1,v1),b=P(u2,v2);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();};
-  const rectUV=(u1,v1,u2,v2)=>{const a=P(u1,v1),b=P(u2,v2);ctx.strokeRect(Math.min(a.x,b.x),Math.min(a.y,b.y),Math.abs(b.x-a.x),Math.abs(b.y-a.y));};
-  const dotUV=(u,v,r)=>{const a=P(u,v);ctx.beginPath();ctx.arc(a.x,a.y,r,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,.85)';ctx.fill();};
-  lineUV(0.5,0,0.5,1);
-  const c=P(0.5,0.5);ctx.beginPath();ctx.arc(c.x,c.y,g.L*0.085,0,Math.PI*2);ctx.stroke();
-  dotUV(0.5,0.5,Math.max(2,g.L*0.008));
-  rectUV(0,0.21,0.165,0.79);rectUV(0.835,0.21,1,0.79);
-  rectUV(0,0.37,0.055,0.63);rectUV(0.945,0.37,1,0.63);
-  dotUV(0.11,0.5,Math.max(2,g.L*0.007));dotUV(0.89,0.5,Math.max(2,g.L*0.007));
-  [0.11,0.89].forEach(u=>{const sp=P(u,0.5);const ang=Math.atan2(c.y-sp.y,c.x-sp.x);ctx.beginPath();ctx.arc(sp.x,sp.y,g.L*0.085,ang-0.85,ang+0.85);ctx.stroke();});
+  const c=f2c(0.5,0.5);
+  ctx.beginPath();ctx.moveTo(c.x,g.y0);ctx.lineTo(c.x,g.y0+g.fh);ctx.stroke();
+  ctx.beginPath();ctx.arc(c.x,c.y,g.L*0.085,0,Math.PI*2);ctx.stroke();
+  const rect=(u1,v1,u2,v2)=>{const a=f2c(u1,v1),b=f2c(u2,v2);ctx.strokeRect(Math.min(a.x,b.x),Math.min(a.y,b.y),Math.abs(b.x-a.x),Math.abs(b.y-a.y));};
+  rect(0,0.21,0.165,0.79);rect(0.835,0.21,1,0.79);
+  rect(0,0.37,0.055,0.63);rect(0.945,0.37,1,0.63);
 }
 function arrowHead(a,b,lw){const ang=Math.atan2(b.y-a.y,b.x-a.x);const len=Math.max(11,lw*3.6);ctx.beginPath();ctx.moveTo(b.x,b.y);ctx.lineTo(b.x-len*Math.cos(ang-0.42),b.y-len*Math.sin(ang-0.42));ctx.lineTo(b.x-len*Math.cos(ang+0.42),b.y-len*Math.sin(ang+0.42));ctx.closePath();ctx.fill();}
 function drawStrokes(){
@@ -1999,13 +2463,11 @@ canvas.addEventListener('pointercancel',endDrag);
 function eraseAt(p){
   const R=Math.max(12,geom().L*0.03);
   const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
-  const distSeg=(pt,a,b)=>{const dx=b.x-a.x,dy=b.y-a.y;const len2=dx*dx+dy*dy;if(!len2)return dist(pt,a);let t=((pt.x-a.x)*dx+(pt.y-a.y)*dy)/len2;t=Math.max(0,Math.min(1,t));return Math.hypot(pt.x-(a.x+t*dx),pt.y-(a.y+t*dy));};
   board.strokes=board.strokes.filter(s=>{
     if(s.type==='pen')return !s.pts.some(pt=>dist(p,f2c(pt.u,pt.v))<R);
     if(s.pts.length<2)return false;
     const a=f2c(s.pts[0].u,s.pts[0].v),b=f2c(s.pts[1].u,s.pts[1].v);
-    if(s.type==='circle'){const r=dist(a,b);return !(Math.abs(dist(p,a)-r)<R||dist(p,a)<R);}
-    return !(distSeg(p,a,b)<R);
+    return !(dist(p,a)<R||dist(p,b)<R);
   });
 }
 $$('.tool[data-tool]').forEach(btn=>{btn.addEventListener('click',()=>{board.tool=btn.dataset.tool;$$('.tool[data-tool]').forEach(b=>b.classList.toggle('active',b===btn));canvas.classList.toggle('select-mode',board.tool==='select');});});
@@ -2022,7 +2484,7 @@ refreshFormationOptions();
 $('#btnApplyFormation').addEventListener('click',()=>{const c=parseInt($('#playerCountSel').value);const n=$('#formationSel').value;const t=$('#teamSel').value;if(applyFormation(c,n,t))toast('✅');});
 $('#btnAddToken').addEventListener('click',()=>{const team=$('#teamSel').value==='B'?'B':'A';const nums=board.tokens.filter(t=>t.team===team).map(t=>t.num);let n=1;while(nums.indexOf(n)!==-1)n++;board.tokens.push({u:team==='A'?0.35:0.65,v:0.5,num:n,team});saveBoard();render();});
 $('#btnClearTokens').addEventListener('click',()=>{if(!confirm('حذف اللاعبين؟'))return;board.tokens=[];saveBoard();render();toast('🗑️');});
-$('#btnResetBoard').addEventListener('click',()=>{if(!confirm('⚠️ إفراغ الملعب بالكامل؟'))return;board.strokes=[];board.tokens=[];saveBoard();render();toast('🧹');});
+$('#btnResetBoard').addEventListener('click',()=>{if(!confirm('⚠️ إفراغ الملعب؟'))return;board.strokes=[];board.tokens=[];saveBoard();render();toast('🧹');});
 
 /* ============ TIMER ============ */
 const timer={mode:'stopwatch',view:'digital',running:false,elapsed:0,total:0,last:0,raf:null,laps:[]};
@@ -2054,7 +2516,7 @@ function stopTimer(){timer.running=false;if(timer.raf)cancelAnimationFrame(timer
 function resetTimer(){stopTimer();timer.elapsed=timer.mode==='countdown'?timer.total:0;timer.laps=[];renderLaps();updateTimerDisplay();$('#timerSub').textContent=timer.mode==='countdown'&&timer.total?'⏳ '+fmt(timer.total,false):'جاهز';}
 $('#btnStart').addEventListener('click',()=>timer.running?stopTimer():startTimer());
 $('#btnReset').addEventListener('click',resetTimer);
-$('#btnLap').addEventListener('click',()=>{if(timer.mode!=='stopwatch'){toast('ℹ️ اللفّات في ساعة الإيقاف');return;}if(!timer.running&&timer.elapsed===0)return;timer.laps.unshift(timer.elapsed);renderLaps();});
+$('#btnLap').addEventListener('click',()=>{if(timer.mode!=='stopwatch'){toast('ℹ️');return;}if(!timer.running&&timer.elapsed===0)return;timer.laps.unshift(timer.elapsed);renderLaps();});
 function renderLaps(){const box=$('#laps');if(!timer.laps.length){box.innerHTML='';return;}box.innerHTML=timer.laps.map((ms,i)=>`<div class="lap"><span style="color:var(--muted)">لفّة ${timer.laps.length-i}</span><span style="font-weight:800">${fmt(ms)}</span></div>`).join('');}
 $$('.fchip[data-mode]').forEach(b=>b.addEventListener('click',()=>{timer.mode=b.dataset.mode;$$('.fchip[data-mode]').forEach(x=>x.classList.toggle('active',x===b));if(timer.mode==='countdown'&&!timer.total)timer.total=5*60*1000;resetTimer();$('#presets').style.display=timer.mode==='countdown'?'flex':'none';$('#btnLap').style.display=timer.mode==='countdown'?'none':'inline-flex';}));
 $$('.fchip[data-tview]').forEach(b=>b.addEventListener('click',()=>{timer.view=b.dataset.tview;$$('.fchip[data-tview]').forEach(x=>x.classList.toggle('active',x===b));renderTimerView();}));
@@ -2064,7 +2526,7 @@ function beep(times){if(times===undefined)times=3;try{const AC=window.AudioConte
 
 /* ============ SETTINGS ============ */
 $('#btnExportAll').addEventListener('click',()=>{
-  const data={version:4,exportedAt:new Date().toISOString(),players,drills,trainings,matches,attendance,board:store.get('coach_board',null)};
+  const data={version:5,exportedAt:new Date().toISOString(),players,drills,trainings,matches,attendance,absenceReasons,matchAbsenceReasons,tsSelected,board:store.get('coach_board',null)};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download='coachpro-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();
@@ -2083,6 +2545,9 @@ $('#importFile').addEventListener('change',e=>{
       if(data.trainings){trainings=data.trainings;store.set('coach_trainings',trainings);}
       if(data.matches){matches=data.matches;store.set('coach_matches',matches);}
       if(data.attendance){attendance=data.attendance;store.set('coach_attendance',attendance);}
+      if(data.absenceReasons){absenceReasons=data.absenceReasons;store.set('coach_absence_reasons',absenceReasons);}
+      if(data.matchAbsenceReasons){matchAbsenceReasons=data.matchAbsenceReasons;store.set('coach_match_absences',matchAbsenceReasons);}
+      if(data.tsSelected){tsSelected=data.tsSelected;store.set('coach_ts_selected',tsSelected);}
       if(data.board){store.set('coach_board',data.board);location.reload();return;}
       toast('📥 تم الاستيراد');renderHome();renderPlayers();
     }catch(err){toast('⚠️ فشل');}
@@ -2092,7 +2557,24 @@ $('#importFile').addEventListener('change',e=>{
 $('#btnResetPlayers').addEventListener('click',()=>{if(!confirm('حذف اللاعبين؟'))return;players=[];store.set('coach_players',players);renderPlayers();toast('🗑️');});
 $('#btnResetAll').addEventListener('click',()=>{if(!confirm('⚠️ حذف كل شيء؟'))return;if(!confirm('تأكيد نهائي؟'))return;localStorage.clear();location.reload();});
 
-/* ============ SPLASH (30s + skip) ============ */
+/* ============ TECH SHEET EVENT BINDINGS ============ */
+$('#ts-search')?.addEventListener('input',renderTsDrills);
+$('#ts-cat-filter')?.addEventListener('change',renderTsDrills);
+$('#ts-total')?.addEventListener('input',renderTsSelected);
+$('#btnPrintSession')?.addEventListener('click',()=>{
+  if(!tsSelected.length){toast('⚠️ أضف حصصاً أولاً');return;}
+  exportSessionPDF(false);
+});
+$('#btnPrintAttendance')?.addEventListener('click',exportAttendancePDF);
+$('#btnPrintBlank')?.addEventListener('click',()=>exportSessionPDF(true));
+$('#report-match-sel')?.addEventListener('change',renderReports);
+$('#btnPrintMatchReport')?.addEventListener('click',()=>{
+  const mid=$('#report-match-sel')?.value;
+  if(!mid){toast('⚠️ اختر مباراة');return;}
+  exportMatchPDF(mid);
+});
+
+/* ============ SPLASH ============ */
 const SPLASH_DURATION=30000;
 let splashDone=false,splashTimerInterval=null,splashRemaining=SPLASH_DURATION/1000;
 function skipSplash(){
@@ -2126,6 +2608,9 @@ const loadInt=setInterval(()=>{
 renderHome();
 renderTrainings();
 renderMatches();
+initTechSheet();
+renderTsDrills();
+renderTsSelected();
 setupCanvas();
 updateTimerDisplay();
 window.addEventListener('load',()=>{setupCanvas();refreshFormationOptions();});
