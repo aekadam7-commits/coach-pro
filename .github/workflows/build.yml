@@ -1,0 +1,54 @@
+name: Build Coach Pro APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 تحميل الكود
+        uses: actions/checkout@v4
+
+      - name: ⚙️ تجهيز Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: ☕ تجهيز Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 🤖 تجهيز Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 📦 تثبيت الحزم
+        run: npm install
+
+      - name: 🏗️ إضافة منصة Android
+        run: npx cap add android
+
+      - name: 🎨 توليد الأيقونة من resources/icon.png
+        run: npx @capacitor/assets generate --android --iconBackgroundColor '#05080f' --iconBackgroundColorDark '#05080f'
+        continue-on-error: true
+
+      - name: 🔄 مزامنة الملفات
+        run: npx cap sync android
+
+      - name: 🔨 بناء APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: 📤 رفع APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: coach-pro-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 90
