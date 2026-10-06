@@ -8,6 +8,12 @@
     "backgroundColor": "#05080f"
   },
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "allowNavigation": ["*"]
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
   }
 }
